@@ -24,7 +24,23 @@ dotenv.config();  // load environment variables from .env file
 
 // Create the express app
 const app = express();  // create instance of express app
-app.use(cors());  // enable cross-origin requests 
+
+// Configure CORS for development and production
+const allowedOrigins = ['http://localhost:5173', 'https://your-frontend-url.onrender.com'];
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    
+    // Check if the origin is allowed
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());  // setup automatic json parsing from request bodies
 
 // Initialize the Gemini API client

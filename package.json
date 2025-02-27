@@ -6,7 +6,10 @@
     "client": "cd client && npm run dev",
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install:all": "npm install && cd client && npm install && cd ../server && npm install"
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd server && NODE_ENV=production node server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install:all && npm run build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
