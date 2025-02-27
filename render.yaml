@@ -2,11 +2,11 @@ services:
   # Backend API service
   - type: web
     name: calming-echo-api
-    env: node
-    region: oregon
-    plan: free
     buildCommand: npm install
     startCommand: npm run start
+    runtime: node
+    region: oregon
+    plan: free
     envVars:
       - key: NODE_ENV
         value: production
@@ -16,13 +16,13 @@ services:
         value: 3001
     healthCheckPath: /api/test-gemini
 
-  # Frontend service
-  - type: static_site
+  # Frontend service as a web service that serves static files
+  - type: web
     name: calming-echo-client
-    env: static
-    plan: free
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: ./client/dist
+    runtime: static
+    plan: free
     routes:
       - type: rewrite
         source: /*
