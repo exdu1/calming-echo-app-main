@@ -17,7 +17,7 @@ services:
     healthCheckPath: /api/test-gemini
 
   # Frontend service
-  - type: static
+  - type: static_site
     name: calming-echo-client
     env: static
     plan: free
