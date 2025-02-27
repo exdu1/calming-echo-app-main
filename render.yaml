@@ -2,8 +2,8 @@ services:
   # Backend API service
   - type: web
     name: calming-echo-api
-    buildCommand: npm install
-    startCommand: npm run start
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
     runtime: node
     region: oregon
     plan: free
