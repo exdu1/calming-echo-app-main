@@ -22,7 +22,6 @@ services:
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: ./client/dist
     runtime: static
-    plan: free
     routes:
       - type: rewrite
         source: /*
