@@ -19,7 +19,7 @@ services:
   # Frontend service as a web service that serves static files
   - type: web
     name: calming-echo-client
-    buildCommand: cd client && npm install && npm run build
+    buildCommand: cd client && npm install --legacy-peer-deps && npm run build
     staticPublishPath: ./client/dist
     runtime: static
     routes:
