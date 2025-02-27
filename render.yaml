@@ -17,10 +17,9 @@ services:
     healthCheckPath: /api/test-gemini
 
   # Frontend service
-  - type: web
+  - type: static
     name: calming-echo-client
     env: static
-    region: oregon
     plan: free
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: ./client/dist
@@ -34,4 +33,3 @@ services:
           name: calming-echo-api
           type: web
           envVarKey: RENDER_EXTERNAL_URL
-        value: https://calming-echo-api.onrender.com/api
