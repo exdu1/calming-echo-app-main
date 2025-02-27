@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,22 +26,9 @@ dotenv.config();  // load environment variables from .env file
 // Create the express app
 const app = express();  // create instance of express app
 
-// Configure CORS for development and production
-const allowedOrigins = ['http://localhost:5173', 'https://your-frontend-url.onrender.com'];
-app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, Postman)
-    if (!origin) return callback(null, true);
-    
-    // Check if the origin is allowed
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}));
+// Simple CORS setup for local development
+app.use(cors());
+
 app.use(express.json());  // setup automatic json parsing from request bodies
 
 // Initialize the Gemini API client
@@ -172,6 +160,15 @@ Maintain an empathetic tone, but keep your response concise.`;
   }
 });
 
-// Start express server to listen on port 3001
+// Serve static files from the React app build directory
+const clientBuildPath = path.join(__dirname, '../client/dist');
+app.use(express.static(clientBuildPath));
+
+// All other GET requests not handled before will return the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientBuildPath, 'index.html'));
+});
+
+// Start express server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
