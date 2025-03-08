@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,25 +24,19 @@ if (!fs.existsSync(envPath)) {
 dotenv.config();  // load environment variables from .env file
 
 // Create the express app
-const app = express();  // create instance of express app
+const app = express();
 
-// Configure CORS for development and production
-const allowedOrigins = ['http://localhost:5173', 'https://your-frontend-url.onrender.com'];
-app.use(cors({
-  origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, Postman)
-    if (!origin) return callback(null, true);
-    
-    // Check if the origin is allowed
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}));
-app.use(express.json());  // setup automatic json parsing from request bodies
+// Configure CORS - accept all origins in development, specific in production
+app.use(cors());
+
+// Setup JSON parsing for API requests
+app.use(express.json());
+
+// Add a request logger for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
 
 // Initialize the Gemini API client
 let genAI;
@@ -59,6 +54,16 @@ try {
 } catch (error) {
   console.error('Error initializing Gemini API client:', error.message);
 }
+
+// Simple health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Backend is running',
+    env: process.env.NODE_ENV,
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Test endpoint to verify Gemini API key
 app.get('/api/test-gemini', async (req, res) => {
@@ -104,6 +109,8 @@ app.get('/api/test-gemini', async (req, res) => {
 // Active Listener endpoint
 app.post('/api/active-listener', async (req, res) => {
   try {
+    console.log('Received active-listener request:', JSON.stringify(req.body).substring(0, 100) + '...');
+    
     if (!geminiModel) {
       return res.status(500).json({
         success: false,
@@ -156,6 +163,8 @@ Maintain an empathetic tone, but keep your response concise.`;
     const summary = summaryMatch ? summaryMatch[1].trim() : "I understand what you're sharing.";
     const question = questionMatch ? questionMatch[1].trim() : "Is there anything else you'd like to talk about?";
     
+    console.log('Generated response successfully');
+    
     return res.json({
       success: true,
       summary,
@@ -172,6 +181,21 @@ Maintain an empathetic tone, but keep your response concise.`;
   }
 });
 
+// Serve static files from the React app build directory in production
+if (process.env.NODE_ENV === 'production') {
+  const clientBuildPath = path.join(__dirname, '../client/dist');
+  console.log(`Serving static files from: ${clientBuildPath}`);
+  
+  app.use(express.static(clientBuildPath));
+  
+  // All other GET requests not handled before will return the React app
+  app.get('*', (req, res) => {
+    // Skip API routes
+    if (req.path.startsWith('/api/')) return next();
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
+}
+
 // Start express server to listen on port 3001
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`));

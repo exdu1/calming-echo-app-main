@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './chatPage.css';
-import API_URL from '../../config/api';
 
 const ChatPage = () => {
     const [messages, setMessages] = useState([]);
@@ -20,6 +19,20 @@ const ChatPage = () => {
         inputRef.current?.focus();
     }, []);
 
+    // Test API connection on component mount
+    useEffect(() => {
+        const testConnection = async () => {
+            try {
+                const response = await axios.get('/api/health');
+                console.log('API connection test:', response.data);
+            } catch (error) {
+                console.error('API connection test failed:', error);
+            }
+        };
+        
+        testConnection();
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -35,11 +48,15 @@ const ChatPage = () => {
             // Get conversation history (last 10 messages)
             const history = messages.slice(-10);
             
-            // Call the active listener endpoint
-            const response = await axios.post('http://localhost:3001/api/active-listener', {
+            console.log('Sending request to API...');
+            
+            // Call the active listener endpoint with a relative path
+            const response = await axios.post('/api/active-listener', {
                 message: input,
                 history
             });
+            
+            console.log('Received response:', response.data);
             
             // Add AI response
             const aiMessage = { 
