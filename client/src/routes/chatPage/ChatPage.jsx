@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import API_URL from '../../config/api';
 import './chatPage.css';
 
 const ChatPage = () => {
@@ -23,13 +24,13 @@ const ChatPage = () => {
     useEffect(() => {
         const testConnection = async () => {
             try {
-                const response = await axios.get('/api/health');
+                const response = await axios.get(`${API_URL}/health`);
                 console.log('API connection test:', response.data);
             } catch (error) {
                 console.error('API connection test failed:', error);
             }
         };
-        
+
         testConnection();
     }, []);
 
@@ -49,9 +50,9 @@ const ChatPage = () => {
             const history = messages.slice(-10);
             
             console.log('Sending request to API...');
-            
-            // Call the active listener endpoint with a relative path
-            const response = await axios.post('/api/active-listener', {
+
+            // Call the active listener endpoint
+            const response = await axios.post(`${API_URL}/active-listener`, {
                 message: input,
                 history
             });
