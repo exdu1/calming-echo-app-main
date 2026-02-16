@@ -16,7 +16,7 @@ const envPath = join(__dirname, '.env');
 if (!fs.existsSync(envPath)) {
   fs.writeFileSync(
     envPath,
-    'GEMINI_API_KEY=your_gemini_api_key_here\nPORT=3001\n'
+    'GEMINI_API_KEY=your_gemini_api_key_here\nPORT=3001\nGEMINI_MODEL_VERSION=your_gemini_model_here\n'
   );
   console.log('.env file created. Please add your Gemini API key.');
 }
@@ -25,10 +25,8 @@ dotenv.config();  // load environment variables from .env file
 
 // Create the express app
 const app = express();
-
 // Configure CORS - accept all origins in development, specific in production
 app.use(cors());
-
 // Setup JSON parsing for API requests
 app.use(express.json());
 
@@ -48,7 +46,7 @@ try {
     console.error('Warning: Gemini API key not configured or is the default value.');
   } else {
     genAI = new GoogleGenerativeAI(apiKey);
-    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    geminiModel = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL_VERSION });
     console.log('Gemini API client initialized successfully.');
   }
 } catch (error) {
@@ -137,18 +135,19 @@ app.post('/api/active-listener', async (req, res) => {
     
     // Create the prompt for Gemini
     const prompt = `${conversationContext}
-You are an Active Listener AI. Your goal is to:
-1. Listen carefully to what the user shares
-2. Provide a thoughtful summary that shows you understand their message
-3. Ask a meaningful follow-up question that encourages deeper reflection
+      You are an Active Listener AI. You will be fully present, attentive, and empathetic, seeking to understand the speaker's message, emotions, and intent. When in a conversation, ask questions like: Tell me more. And then what happened? So if I understand you correctly, this, this, and this happened. And it made you feel this way. Is that right? Is that how you feel? So what are you going to do now? And how did that make you feel? 
+      Your goal is to:
 
-User's message: "${message}"
+      1. Listen carefully to what the user shares
+      2. Provide a thoughtful summary that shows you understand their message
+      3. Ask a meaningful follow-up question that encourages deeper reflection
 
-Respond in the following format:
-SUMMARY: [A concise summary showing you understand what they've shared. Be empathetic and reflective.]
-QUESTION: [A single, thoughtful follow-up question. Keep it open-ended and focused on the user's sharing.]
+      User's message: "${message}"
 
-Maintain an empathetic tone, but keep your response concise.`;
+      Respond in the following format:
+      SUMMARY: [A concise summary showing you understand what they've shared. Be empathetic and reflective.]
+      QUESTION: [A single, thoughtful follow-up question. Keep it open-ended and focused on the user's sharing.] 
+      Maintain an empathetic tone, but keep your response concise.`;
     
     console.log("Sending prompt to Gemini...");
     
