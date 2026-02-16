@@ -25,10 +25,8 @@ dotenv.config();  // load environment variables from .env file
 
 // Create the express app
 const app = express();
-
 // Configure CORS - accept all origins in development, specific in production
 app.use(cors());
-
 // Setup JSON parsing for API requests
 app.use(express.json());
 
