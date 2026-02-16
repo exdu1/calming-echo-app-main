@@ -8,18 +8,18 @@ import fs from 'fs';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import path from 'path';
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-// // Check for .env file and create it if it doesn't exist
-// const envPath = join(__dirname, '.env');
-// if (!fs.existsSync(envPath)) {
-//   fs.writeFileSync(
-//     envPath,
-//     'GEMINI_API_KEY=your_gemini_api_key_here\nPORT=3001\nGEMINI_MODEL_VERSION=your_gemini_model_here\n'
-//   );
-//   console.log('.env file created. Please add your Gemini API key.');
-// }
+// Check for .env file and create it if it doesn't exist
+const envPath = join(__dirname, '.env');
+if (!fs.existsSync(envPath)) {
+  fs.writeFileSync(
+    envPath,
+    'GEMINI_API_KEY=your_gemini_api_key_here\nPORT=3001\nGEMINI_MODEL_VERSION=your_gemini_model_here\n'
+  );
+  console.log('.env file created. Please add your Gemini API key.');
+}
 
 dotenv.config();  // load environment variables from .env file
 
