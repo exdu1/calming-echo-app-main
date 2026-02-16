@@ -46,7 +46,7 @@ try {
     console.error('Warning: Gemini API key not configured or is the default value.');
   } else {
     genAI = new GoogleGenerativeAI(apiKey);
-    geminiModel = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL_VERSION });
+    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     console.log('Gemini API client initialized successfully.');
   }
 } catch (error) {
