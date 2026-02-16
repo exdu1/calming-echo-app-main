@@ -16,7 +16,7 @@ const envPath = join(__dirname, '.env');
 if (!fs.existsSync(envPath)) {
   fs.writeFileSync(
     envPath,
-    'GEMINI_API_KEY=your_gemini_api_key_here\nPORT=3001\n'
+    'GEMINI_API_KEY=your_gemini_api_key_here\nPORT=3001\nGEMINI_MODEL_VERSION=your_gemini_model_here\n'
   );
   console.log('.env file created. Please add your Gemini API key.');
 }
