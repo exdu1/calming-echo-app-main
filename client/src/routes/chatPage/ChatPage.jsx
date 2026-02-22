@@ -60,11 +60,9 @@ const ChatPage = () => {
             
             // Add AI response
             const aiMessage = { 
-                text: `${response.data.summary}\n\n${response.data.question}`, 
+                text: response.data.response, 
                 isUser: false, 
                 timestamp: new Date(),
-                summary: response.data.summary,
-                question: response.data.question 
             };
             
             setMessages(prev => [...prev, aiMessage]);

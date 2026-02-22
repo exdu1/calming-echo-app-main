@@ -4,9 +4,9 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import config from './config/index.js';
-import gemini from './config/gemini.js';
+import config, { validateConfig } from './config/index.js';
+import { initGemini, getModel } from './config/gemini.js';
+
 
 
 // Setup ES modules
@@ -25,7 +25,11 @@ app.use((req, res, next) => {
 });
 
 // Initialize the Gemini client
-let geminiModel = gemini();
+if (validateConfig()) {
+  initGemini();
+};
+
+const geminiModel = getModel();
 
 // Simple health check endpoint
 app.get('/api/health', (req, res) => {
@@ -90,8 +94,7 @@ app.post('/api/active-listener', async (req, res) => {
     
     return res.json({
       success: true,
-      summary,
-      question
+      response: responseText
     });
     
   } catch (error) {
