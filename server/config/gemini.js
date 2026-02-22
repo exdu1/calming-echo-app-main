@@ -6,7 +6,7 @@ let geminiModel = null;
 // Validate API key and initialize Gemini API client
 export function initGemini() {
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
+    const genAI = new GoogleGenerativeAI(config.geminiApiKey);
     geminiModel = genAI.getGenerativeModel({ model: config.geminiModel});
     console.log(`Gemini API client initialized with ${config.geminiModel}`);
     return true;

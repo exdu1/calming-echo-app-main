@@ -29,7 +29,6 @@ if (validateConfig()) {
   initGemini();
 };
 
-const geminiModel = getModel();
 
 // Simple health check endpoint
 app.get('/api/health', (req, res) => {
@@ -44,15 +43,15 @@ app.get('/api/health', (req, res) => {
 // Active Listener endpoint
 app.post('/api/active-listener', async (req, res) => {
   try {
-    console.log('Received active-listener request:', JSON.stringify(req.body).substring(0, 100) + '...');
-    
+    const geminiModel = getModel();
+
     if (!geminiModel) {
       return res.status(500).json({
         success: false,
         message: 'Gemini model not initialized. Check server logs for details.'
       });
     }
-    
+
     const { message, history = [] } = req.body;
     
     if (!message) {
@@ -61,6 +60,8 @@ app.post('/api/active-listener', async (req, res) => {
         message: 'Message is required' 
       });
     }
+
+    console.log('Received active-listener request:', JSON.stringify(req.body).substring(0, 100) + '...');
     
     // Format conversation history for context
     let conversationContext = "";
