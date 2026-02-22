@@ -9,7 +9,7 @@ import config from './config/index.js';
 import gemini from './config/gemini.js';
 
 
-// Setupp ES modules
+// Setup ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -36,7 +36,6 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
-
 
 // Active Listener endpoint
 app.post('/api/active-listener', async (req, res) => {
@@ -78,9 +77,6 @@ app.post('/api/active-listener', async (req, res) => {
 
       User's message: "${message}"
 
-      Respond in the following format:
-      SUMMARY: [A concise summary showing you understand what they've shared. Be empathetic and reflective.]
-      QUESTION: [A single, thoughtful follow-up question. Keep it open-ended and focused on the user's sharing.] 
       Maintain an empathetic tone, but keep your response concise.`;
     
     console.log("Sending prompt to Gemini...");
@@ -89,12 +85,6 @@ app.post('/api/active-listener', async (req, res) => {
     const result = await geminiModel.generateContent(prompt);
     const responseText = result.response.text();
     
-    // Parse the response to extract summary and question
-    const summaryMatch = responseText.match(/SUMMARY:\s*([\s\S]*?)(?=QUESTION:|$)/i);
-    const questionMatch = responseText.match(/QUESTION:\s*([\s\S]*?)(?=$)/i);
-    
-    const summary = summaryMatch ? summaryMatch[1].trim() : "I understand what you're sharing.";
-    const question = questionMatch ? questionMatch[1].trim() : "Is there anything else you'd like to talk about?";
     
     console.log('Generated response successfully');
     
