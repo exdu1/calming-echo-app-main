@@ -6,6 +6,8 @@ import { dirname } from 'path';
 import path from 'path';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import config from './config/index.js';
+import gemini from './config/gemini.js';
+
 
 // Setupp ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -22,22 +24,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Initialize the Gemini API client
-let genAI;
-let geminiModel;
-
-try {
-  const apiKey = config.geminiApiKey;
-  if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-    console.error('Warning: Gemini API key not configured or is the default value.');
-  } else {
-    genAI = new GoogleGenerativeAI(apiKey);
-    geminiModel = genAI.getGenerativeModel({ model: config.geminiModel });
-    console.log(`Gemini API client initialized with model: ${config.geminiModel}.`);
-  }
-} catch (error) {
-  console.error('Error initializing Gemini API client:', error.message);
-}
+// Initialize the Gemini client
+let geminiModel = gemini();
 
 // Simple health check endpoint
 app.get('/api/health', (req, res) => {
