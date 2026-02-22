@@ -1,10 +1,11 @@
 import express from 'express';
+import { getModel } from '../config/gemini.js';
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const geminiModel = req.app.get('geminiModel');
+    const geminiModel = getModel();
 
     if(!geminiModel) {
       return res.status(500).json({
