@@ -37,46 +37,6 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Test endpoint to verify Gemini API key
-app.get('/api/test-gemini', async (req, res) => {
-  try {
-    // Check if API key exists
-    const apiKey = config.geminiApiKey;
-    
-    if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-      return res.status(500).json({ 
-        success: false, 
-        message: 'Gemini API key not configured. Please add your key to the .env file.' 
-      });
-    }
-    
-    if (!geminiModel) {
-      return res.status(500).json({
-        success: false,
-        message: 'Gemini model not initialized. Check server logs for details.'
-      });
-    }
-    
-    // Test the model with a simple prompt
-    const prompt = "Respond with a simple 'API connection successful' message";
-    const result = await geminiModel.generateContent(prompt);
-    const responseText = result.response.text();
-    
-    return res.json({ 
-      success: true, 
-      message: 'Gemini API connection successful',
-      modelResponse: responseText
-    });
-    
-  } catch (error) {
-    console.error('Gemini API test failed:', error.message);
-    return res.status(500).json({ 
-      success: false, 
-      message: 'Gemini API test failed',
-      error: error.message
-    });
-  }
-});
 
 // Active Listener endpoint
 app.post('/api/active-listener', async (req, res) => {
