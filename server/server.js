@@ -29,7 +29,7 @@ if (validateConfig()) {
 };
 
 // Mount routes
-app.use('/api/acitve-listner', activeListenerRouter);
+app.use('/api/active-listener', activeListenerRouter);
 
 // Simple health check endpoint
 app.get('/api/health', (req, res) => {
