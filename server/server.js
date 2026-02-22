@@ -1,24 +1,20 @@
 // Import packages
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import fs from 'fs';
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { dirname } from 'path';
 import path from 'path';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import config from './config/index.js';
 
+// Setupp ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-dotenv.config();  // load environment variables from .env file
-
-// Create the express app
+// Create and configure Express app
 const app = express();
-// Configure CORS - accept all origins in development, specific in production
-app.use(cors());
-// Setup JSON parsing for API requests
-app.use(express.json());
+app.use(cors()); // CORS - accept all origins in development, specific in production
+app.use(express.json()); // JSON parsing for API requests
 
 // Add a request logger for debugging
 app.use((req, res, next) => {
@@ -31,13 +27,13 @@ let genAI;
 let geminiModel;
 
 try {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = config.geminiApiKey;
   if (!apiKey || apiKey === 'your_gemini_api_key_here') {
     console.error('Warning: Gemini API key not configured or is the default value.');
   } else {
     genAI = new GoogleGenerativeAI(apiKey);
-    geminiModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    console.log('Gemini API client initialized successfully.');
+    geminiModel = genAI.getGenerativeModel({ model: config.geminiModel });
+    console.log(`Gemini API client initialized with model: ${config.geminiModel}.`);
   }
 } catch (error) {
   console.error('Error initializing Gemini API client:', error.message);
@@ -48,7 +44,7 @@ app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
     message: 'Backend is running',
-    env: process.env.NODE_ENV,
+    env: config.nodeEnv,
     timestamp: new Date().toISOString()
   });
 });
@@ -57,7 +53,7 @@ app.get('/api/health', (req, res) => {
 app.get('/api/test-gemini', async (req, res) => {
   try {
     // Check if API key exists
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = config.geminiApiKey;
     
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
       return res.status(500).json({ 
@@ -171,14 +167,14 @@ app.post('/api/active-listener', async (req, res) => {
 });
 
 // Serve static files from the React app build directory in production
-if (process.env.NODE_ENV === 'production') {
+if (config.nodeEnv === 'production') {
   const clientBuildPath = path.join(__dirname, '../client/dist');
   console.log(`Serving static files from: ${clientBuildPath}`);
   
   app.use(express.static(clientBuildPath));
   
   // All other GET requests not handled before will return the React app
-  app.get('*', (req, res) => {
+  app.get('*', (req, res, next) => {
     // Skip API routes
     if (req.path.startsWith('/api/')) return next();
     res.sendFile(path.join(clientBuildPath, 'index.html'));
@@ -186,5 +182,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Start express server to listen on port 3001
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`));
+app.listen(config.port, () => console.log(`Server running on port ${config.port} in ${config.nodeEnv} mode`));
