@@ -17,6 +17,9 @@ project-root/
 │   ├── package.json
 │   └── vite.config.js
 ├── server/               # Backend Express server
+|   ├── config/           # Configureation for server
+│   │   ├── index.js      # Centralized env variables and settings
+│   │   ├── gemini.js     # Initiate the gemini model   
 │   ├── server.js         # API routes and server setup
 │   ├── .env              # Environment variables (not in repo)
 │   ├── .env.example      # Example environment template
