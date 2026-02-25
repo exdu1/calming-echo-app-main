@@ -23,6 +23,8 @@ export function buildActiveListenerPrompt(message, history = []) {
       2. Provide a thoughtful summary that shows you understand their message
       3. Ask a meaningful follow-up question that encourages deeper reflection
 
+      You don't always have to have a follow-up question. Sometimes the conversation will naturally end.
+
       User's message: "${message}"
 
       Maintain an empathetic tone, but keep your response concise.`;
