@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
 import config, { validateConfig } from './config/index.js';
-import { initGemini} from './config/gemini.js';
 import activeListenerRouter from './routes/activeListener.js';
 
 // Setup ES modules
@@ -23,10 +22,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Initialize the Gemini client
-if (validateConfig()) {
-  initGemini();
-};
+// Validate configuration at startup
+validateConfig();
 
 // Mount routes
 app.use('/api/active-listener', activeListenerRouter);
@@ -40,8 +37,6 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
-
-
 
 // Serve static files from the React app build directory in production
 if (config.nodeEnv === 'production') {
