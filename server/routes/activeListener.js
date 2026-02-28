@@ -1,12 +1,12 @@
 import express from 'express';
-import { getModel } from '../config/gemini.js';
+import { getClient } from '../config/gemini.js';
 import { buildActiveListenerPrompt } from '../prompts/activeListenerPrompt.js';
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const geminiModel = getModel();
+    const geminiModel = getClient();
 
     if(!geminiModel) {
       return res.status(500).json({

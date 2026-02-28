@@ -1,14 +1,13 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import config from './index.js';
 
-let geminiModel = null;
+let geminiClient= null;
 
 // Validate API key and initialize Gemini API client
 export function initGemini() {
   try {
-    const genAI = new GoogleGenerativeAI(config.geminiApiKey);
-    geminiModel = genAI.getGenerativeModel({ model: config.geminiModel});
-    console.log(`Gemini API client initialized with ${config.geminiModel}`);
+    geminiClient = new GoogleGenAI({ apiKey: config.geminiApiKey });
+    console.log('Gemini API client initialized.');
     return true;
     } catch (error) {
       console.error('Error initializing Gemini API client:', error.message);
