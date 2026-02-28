@@ -15,6 +15,7 @@
     "concurrently": "^8.2.2"
   },
   "dependencies": {
+    "@google/genai": "^1.43.0",
     "nodemon": "^3.1.14"
   }
 }
