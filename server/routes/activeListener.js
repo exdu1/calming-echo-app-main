@@ -1,6 +1,6 @@
 import express from 'express';
 import ai from '../config/gemini.js';
-import config from '..config/index.js';
+import config from '../config/index.js';
 import { buildActiveListenerPrompt } from '../prompts/activeListenerPrompt.js';
 
 const router = express.Router();
