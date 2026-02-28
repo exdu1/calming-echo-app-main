@@ -1,7 +1,7 @@
 import express from 'express';
 import ai from '../config/gemini.js';
 import config from '../config/index.js';
-import { buildActiveListenerPrompt } from '../prompts/activeListenerPrompt.js';
+import { SYSTEM_INSTRUCTION, buildContents } from '../prompts/activeListenerPrompt.js';
 
 const router = express.Router();
 
@@ -17,16 +17,16 @@ router.post('/', async (req, res) => {
   }
     
     console.log('Received active-listener request:', JSON.stringify(req.body).substring(0, 100) + '...');
-
-    // Build the prompt using the extracted prompt module
-    const prompt = buildActiveListenerPrompt(message, history);
-
+    const contents = buildContents(message, history);
     console.log("Sending prompt to Gemini...");
 
-    // Get response from Gemini
+    // Get response from Gemini using system instruction and structured contents
     const result = await ai.models.generateContent({
-      model: config.geminModel,
-      contents: prompt
+      model: config.geminiModel,
+      contents: contents,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION
+      }
     });
 
     console.log('Generated response successfully');
