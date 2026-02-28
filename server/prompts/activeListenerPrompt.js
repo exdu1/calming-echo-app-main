@@ -14,8 +14,6 @@ export const SYSTEM_INSTRUCTION = `
 
       You don't always have to have a follow-up question. Sometimes the conversation will naturally end.
 
-      User's message: "${message}"
-
       Maintain an empathetic tone, but keep your response concise.`;
 
 
