@@ -1,20 +1,8 @@
+// Create and export the Gemini client as per github.com/googleapis/js-genai/blob/main/codegen_instructions.md
+
 import { GoogleGenAI } from "@google/genai";
 import config from './index.js';
 
-let geminiClient= null;
+const ai = new GoogleGenAI({ apiKey: config.geminiApiKey });
 
-// Validate API key and initialize Gemini API client
-export function initGemini() {
-  try {
-    geminiClient = new GoogleGenAI({ apiKey: config.geminiApiKey });
-    console.log('Gemini API client initialized.');
-    return true;
-    } catch (error) {
-      console.error('Error initializing Gemini API client:', error.message);
-      return false;
-  };
-};
-
-export function getModel() {
-  return geminiModel;
-};
+export default ai;
