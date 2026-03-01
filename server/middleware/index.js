@@ -7,7 +7,7 @@ export function setupMiddleware(app) {
   app.use(express.json());
 
   if (config.nodeEnv !== 'production') {
-    app.use(cors);
+    app.use(cors());
   };
 
   const logFormat = config.nodeEnv === 'production' ? 'combined' : 'dev';
