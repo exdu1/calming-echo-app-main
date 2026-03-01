@@ -1,45 +1,39 @@
 import express from 'express';
-import { getModel } from '../config/gemini.js';
-import { buildActiveListenerPrompt } from '../prompts/activeListenerPrompt.js';
+import ai from '../config/gemini.js';
+import config from '../config/index.js';
+import { SYSTEM_INSTRUCTION, buildContents } from '../prompts/activeListenerPrompt.js';
 
 const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const geminiModel = getModel();
-
-    if(!geminiModel) {
-      return res.status(500).json({
-        success: false,
-        message: 'Gemini model not intialized. Check server logs for details.'
-      });
-    };
-    
     const { message, history = [] } = req.body;
 
     if(!message) {
-      return res.status(400).json({
-        success: false,
-        message: 'Message is required.'
-      });
-    }
-
+    return res.status(400).json({
+      success: false,
+      message: 'Message is required.'
+    });
+  }
+    
     console.log('Received active-listener request:', JSON.stringify(req.body).substring(0, 100) + '...');
-
-    // Build the prompt using the extracted prompt module
-    const prompt = buildActiveListenerPrompt(message, history);
-
+    const contents = buildContents(message, history);
     console.log("Sending prompt to Gemini...");
 
-    // Get response from Gemini
-    const result = await geminiModel.generateContent(prompt);
-    const responseText = result.response.text();
+    // Get response from Gemini using system instruction and structured contents
+    const result = await ai.models.generateContent({
+      model: config.geminiModel,
+      contents: contents,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION
+      }
+    });
 
     console.log('Generated response successfully');
 
     return res.json({
       success: true,
-      response: responseText
+      response: result.text
     });
   } catch (error) {
     console.error('Active listener request failed:', error);
