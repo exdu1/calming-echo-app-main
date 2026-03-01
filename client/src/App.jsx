@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ChatPage from './routes/chatPage/ChatPage';
-import Dashboard from './routes/dashrboard/Dashboard';
+import Dashboard from './routes/dashboard/Dashboard';
 import Homepage from './routes/homepage/Homepage';
 
 const App = () => {
