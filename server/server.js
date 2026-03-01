@@ -1,29 +1,24 @@
 // Import packages
 import express from 'express';
-import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from 'path';
 import config, { validateConfig } from './config/index.js';
 import activeListenerRouter from './routes/activeListener.js';
+import { setupMiddleware } from './middleware/index.js';
 
 // Setup ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Validate configuration at startup and fail fast if misconfigured
+if (!validateConfig()) {
+  process.exit(1);
+};
+
 // Create and configure Express app
 const app = express();
-app.use(cors()); // CORS - accept all origins in development, specific in production
-app.use(express.json()); // JSON parsing for API requests
-
-// Add a request logger for debugging
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
-  next();
-});
-
-// Validate configuration at startup
-validateConfig();
+setupMiddleware(app);
 
 // Mount routes
 app.use('/api/active-listener', activeListenerRouter);
@@ -32,8 +27,6 @@ app.use('/api/active-listener', activeListenerRouter);
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'ok', 
-    message: 'Backend is running',
-    env: config.nodeEnv,
     timestamp: new Date().toISOString()
   });
 });
