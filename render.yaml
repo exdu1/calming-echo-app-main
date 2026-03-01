@@ -1,9 +1,8 @@
 services:
-  # Backend API service
   - type: web
-    name: calming-echo-api
-    buildCommand: cd server && npm install
-    startCommand: cd server && npm start
+    name: calming-echo
+    buildCommand: npm run build
+    startCommand: npm run start
     runtime: node
     region: oregon
     plan: free
@@ -12,23 +11,4 @@ services:
         value: production
       - key: GEMINI_API_KEY
         sync: false
-      - key: PORT
-        value: 3001
-    healthCheckPath: /api/test-gemini
-
-  # Frontend service as a web service that serves static files
-  - type: web
-    name: calming-echo-client
-    buildCommand: cd client && npm install --legacy-peer-deps && npm run build
-    staticPublishPath: ./client/dist
-    runtime: static
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          name: calming-echo-api
-          type: web
-          envVarKey: RENDER_EXTERNAL_URL
+    healthCheckPath: /api/health
