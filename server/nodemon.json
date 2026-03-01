@@ -1,5 +1,5 @@
 {
-  "watch": ["*.js", "config/", "routes/"],
-  "ignore": ["node_modules/", "*.log"],
+  "watch": ["*.js", "config/", "routes/", "middleware/"],
+  "ignore": ["node_modules/", "tests/", "*.log"],
   "ext": "js,json"
 }

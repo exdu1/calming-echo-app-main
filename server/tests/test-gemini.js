@@ -1,6 +1,6 @@
 // Import required packages
-import ai from './config/gemini.js';
-import config, { validateConfig } from './config/index.js';
+import ai from '../config/gemini.js';
+import config, { validateConfig } from '../config/index.js';
 
 
 
@@ -22,7 +22,7 @@ async function testGeminiAPI() {
     // Log the response
     console.log('\nGemini API Response:');
     console.log('===================');
-    console.log(responseText);
+    console.log(result.text);
     console.log('===================');
     console.log('\nAPI test completed successfully!');
     
