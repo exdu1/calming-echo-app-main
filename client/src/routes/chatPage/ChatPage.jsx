@@ -19,20 +19,6 @@ const ChatPage = () => {
         inputRef.current?.focus();
     }, []);
 
-    // Test API connection on component mount
-    useEffect(() => {
-        const testConnection = async () => {
-            try {
-                const response = await axios.get('/api/health');
-                console.log('API connection test:', response.data);
-            } catch (error) {
-                console.error('API connection test failed:', error);
-            }
-        };
-        
-        testConnection();
-    }, []);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         
