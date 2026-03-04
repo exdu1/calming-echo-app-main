@@ -90,16 +90,7 @@ const ChatPage = () => {
                                 className={`message ${msg.isUser ? 'user-message' : 'ai-message'} ${msg.isError ? 'error-message' : ''}`}
                             >
                                 <div className="message-bubble">
-                                    {msg.isUser ? (
-                                        <p>{msg.text}</p>
-                                    ) : msg.summary && msg.question ? (
-                                        <>
-                                            <p className="ai-summary">{msg.summary}</p>
-                                            <p className="ai-question">{msg.question}</p>
-                                        </>
-                                    ) : (
-                                        <p>{msg.text}</p>
-                                    )}
+                                    <p>{msg.text}</p>
                                 </div>
                                 <div className="message-time">
                                     {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
