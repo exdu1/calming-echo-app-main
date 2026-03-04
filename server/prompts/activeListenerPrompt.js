@@ -14,7 +14,7 @@ export const SYSTEM_INSTRUCTION = `
 
       You don't always have to have a follow-up question. Sometimes the conversation will naturally end.
 
-      Maintain an empathetic tone, but keep your response concise.`;
+      Maintain an empathetic, but casual and familar tone, but keep your response concise.`;
 
 
 /**
