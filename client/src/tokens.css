@@ -1,42 +1,84 @@
-/* Design Tokens */
+/*
+ * Design Tokens — Calming Echo
+ * 
+ * Single source of truth for all visual decisions.
+ * Every component references these variables instead of hardcoded values.
+ *
+ * Aesthetic direction: Warm & Soft
+ *   - Rounded corners, warm neutrals, gentle gradients
+ *   - Emotionally safe, approachable, intimate
+ *
+ * Naming convention: --ce-{category}-{property}-{variant}
+ *   ce = Calming Echo (namespaced to avoid collisions)
+ */
 
 :root {
-  /* --- Background layers (darkest to lightest) --- */
-  --ce-color-bg-base:        #1a1518;      /* deepest background — warm near-black    */
-  --ce-color-bg-surface:     #241f22;      /* card/container background               */
-  --ce-color-bg-elevated:    #2e2830;      /* raised elements (input fields, headers)  */
-  --ce-color-bg-hover:       #3a3240;      /* hover states on surfaces                */
+  /* ===================================================
+     COLOR PALETTE — LIGHT MODE (default)
+     
+     Dawn/dusk inspired by the landscape photo:
+     Slate-green and muted teal backgrounds (mountains),
+     warm peach cream text (sky), coral accents (sunset).
+     =================================================== */
 
-  /* --- Text --- */
-  --ce-color-text-primary:   #f0ebe6;      /* main body text — warm off-white         */
-  --ce-color-text-secondary: #b0a8a0;      /* supporting text, timestamps             */
-  --ce-color-text-muted:     #7a7270;      /* placeholders, disabled states           */
+  /* --- Background layers (muted teal-slate, like the mountains) --- */
+  --ce-color-bg-base:        #4a6260;      /* deepest background — mountain slate       */
+  --ce-color-bg-surface:     #567270;      /* card/container — teal-slate               */
+  --ce-color-bg-elevated:    #628280;      /* raised elements — lighter slate           */
+  --ce-color-bg-hover:       #6e8e8a;      /* hover states — sage                      */
 
-  /* --- Accent (warm amber/gold) --- */
-  --ce-color-accent:         #c8956c;      /* primary accent — warm amber             */
-  --ce-color-accent-soft:    rgba(200, 149, 108, 0.15);  /* accent tint for backgrounds */
-  --ce-color-accent-hover:   #d4a57c;      /* accent hover state                     */
+  /* --- Text (warm peach, like the sky) --- */
+  --ce-color-text-primary:   #FBE0C3;      /* main body text — peach cream              */
+  --ce-color-text-secondary: #d4c4b0;      /* supporting text — muted peach             */
+  --ce-color-text-muted:     #9aaca8;      /* placeholders, disabled — pale sage        */
+
+  /* --- Accent (coral/sunset tones) --- */
+  --ce-color-accent:         #FFBB98;      /* primary accent — coral peach              */
+  --ce-color-accent-soft:    rgba(255, 187, 152, 0.15);  /* accent tint for backgrounds */
+  --ce-color-accent-hover:   #FCD0B4;      /* accent hover — lighter peach              */
 
   /* --- Message bubbles --- */
-  --ce-color-bubble-user:    #4a3a2e;      /* user message — warm brown               */
-  --ce-color-bubble-ai:      #2a2430;      /* AI message — soft purple-gray           */
-  --ce-color-bubble-error:   #3d2828;      /* error state — muted warm red            */
+  --ce-color-bubble-user:    #5a7472;      /* user message — sage slate                 */
+  --ce-color-bubble-ai:      #4e6664;      /* AI message — deeper teal                  */
+  --ce-color-bubble-error:   #6a5050;      /* error state — muted warm red              */
 
   /* --- Borders & dividers --- */
-  --ce-color-border:         rgba(255, 255, 255, 0.06);   /* subtle dividers          */
-  --ce-color-border-focus:   rgba(200, 149, 108, 0.40);   /* focus rings              */
+  --ce-color-border:         rgba(251, 224, 195, 0.10);  /* subtle peach dividers       */
+  --ce-color-border-focus:   rgba(255, 187, 152, 0.45);  /* coral focus rings           */
 
   /* --- Gradients --- */
-  --ce-gradient-hero:        linear-gradient(135deg, #c8956c, #a87b9b);  /* hero text  */
-  --ce-gradient-button:      linear-gradient(135deg, #c8956c, #b8856c);  /* CTA button */
+  --ce-gradient-hero:        linear-gradient(135deg, #FFBB98, #FBE0C3);  /* hero text   */
+  --ce-gradient-button:      linear-gradient(135deg, #FFBB98, #e8a080);  /* CTA button  */
   --ce-gradient-glow:        radial-gradient(
                                ellipse at 50% 0%,
-                               rgba(200, 149, 108, 0.08) 0%,
+                               rgba(255, 187, 152, 0.08) 0%,
                                transparent 70%
-                             );  /* subtle top glow for containers */
+                             );  /* subtle top glow */
+
+  /* --- Hero overlay & text (over background image) --- */
+  --ce-color-hero-overlay-top:    rgba(74, 98, 96, 0.3);    /* teal-slate, light */
+  --ce-color-hero-overlay-mid:    rgba(74, 98, 96, 0.5);
+  --ce-color-hero-overlay-bottom: rgba(74, 98, 96, 0.75);
+  --ce-color-hero-text:           #FBE0C3;                   /* peach cream */
+  --ce-color-hero-text-sub:       rgba(251, 224, 195, 0.85);
+  --ce-color-hero-hint:           rgba(251, 224, 195, 0.5);
+  --ce-hero-placeholder:          linear-gradient(170deg, #FFBB98 0%, #e8a080 20%, #7D8E95 50%, #4a6260 80%, #344648 100%);
+
+  /* --- Shadows --- */
+  --ce-shadow-sm:            0 1px 3px rgba(30, 40, 38, 0.20);
+  --ce-shadow-md:            0 4px 16px rgba(30, 40, 38, 0.25);
+  --ce-shadow-lg:            0 8px 32px rgba(30, 40, 38, 0.35);
+  --ce-shadow-glow:          0 4px 20px rgba(255, 187, 152, 0.20);  /* coral glow */
 
 
-  /* TYPOGRAPHY*/
+  /* ===================================================
+     TYPOGRAPHY
+     
+     Using system fonts with warm, humanist characteristics.
+     The scale follows a modular ratio (~1.25 major third)
+     for natural visual rhythm.
+     =================================================== */
+
   --ce-font-family-body:     'Segoe UI', system-ui, -apple-system, sans-serif;
   --ce-font-family-display:  Georgia, 'Times New Roman', serif;
 
@@ -61,7 +103,14 @@
   --ce-font-weight-bold:     700;
 
 
-  /* SPACING */
+  /* ===================================================
+     SPACING
+     
+     8px base unit. Consistent spacing creates visual
+     rhythm and reduces cognitive load — important for
+     an app where users may be in a vulnerable state.
+     =================================================== */
+
   --ce-space-xs:             0.25rem;      /*  4px */
   --ce-space-sm:             0.5rem;       /*  8px */
   --ce-space-md:             1rem;         /* 16px */
@@ -71,7 +120,12 @@
   --ce-space-3xl:            5rem;         /* 80px */
 
 
-  /* BORDERS & RADII */
+  /* ===================================================
+     BORDERS & RADII
+     
+     Generous radii reinforce the "soft" aesthetic.
+     Everything feels approachable, nothing is sharp.
+     =================================================== */
 
   --ce-radius-sm:            8px;          /* small elements (tags, pills)           */
   --ce-radius-md:            12px;         /* cards, containers                      */
@@ -80,15 +134,12 @@
   --ce-radius-full:          9999px;       /* fully round (avatars, dots)            */
 
 
-  /* SHADOWS */
-
-  --ce-shadow-sm:            0 1px 3px rgba(30, 20, 15, 0.12);
-  --ce-shadow-md:            0 4px 16px rgba(30, 20, 15, 0.18);
-  --ce-shadow-lg:            0 8px 32px rgba(30, 20, 15, 0.25);
-  --ce-shadow-glow:          0 4px 20px rgba(200, 149, 108, 0.15);  /* accent glow */
-
-
-  /* TRANSITIONS */
+  /* ===================================================
+     TRANSITIONS
+     
+     Slightly slower than typical UI transitions.
+     Calm, deliberate movement — nothing snappy or jarring.
+     =================================================== */
 
   --ce-transition-fast:      150ms ease;
   --ce-transition-base:      250ms ease;
@@ -96,9 +147,76 @@
   --ce-transition-gentle:    600ms cubic-bezier(0.23, 1, 0.32, 1);
 
 
-  /* LAYOUT */
+  /* ===================================================
+     LAYOUT
+     
+     Max-width constraints and consistent container sizing.
+     =================================================== */
 
   --ce-width-chat:           720px;        /* chat container max-width               */
   --ce-width-content:        1100px;       /* general content max-width              */
   --ce-height-chat:          88vh;         /* chat container height                  */
+}
+
+
+/* ===================================================
+   DARK MODE
+   
+   Activated via data-theme="dark" attribute on <html>,
+   controlled by the theme toggle button in App.jsx.
+   
+   Deep night palette: warm-tinted darks with the same
+   coral accent family. Feels like the dusk side of the
+   dawn/dusk spectrum — the light mode's evening twin.
+   =================================================== */
+
+:root[data-theme="dark"] {
+  /* --- Background layers (darkest to lightest) --- */
+  --ce-color-bg-base:        #1c2526;      /* deepest background — night                */
+  --ce-color-bg-surface:     #263032;      /* card/container — deep teal-slate          */
+  --ce-color-bg-elevated:    #303c3e;      /* raised elements — slightly lifted         */
+  --ce-color-bg-hover:       #3c4a4c;      /* hover states — muted slate                */
+
+  /* --- Text --- */
+  --ce-color-text-primary:   #F5E6D3;      /* main body text — warm cream               */
+  --ce-color-text-secondary: #b8c4c8;      /* supporting text — light steel             */
+  --ce-color-text-muted:     #6e7e84;      /* placeholders, disabled — dim steel        */
+
+  /* --- Accent (lighter coral for dark bg contrast) --- */
+  --ce-color-accent:         #FFBB98;      /* primary accent — coral peach              */
+  --ce-color-accent-soft:    rgba(255, 187, 152, 0.12);  /* accent tint for backgrounds */
+  --ce-color-accent-hover:   #FCD0B4;      /* accent hover — lighter peach              */
+
+  /* --- Message bubbles --- */
+  --ce-color-bubble-user:    #3a4a46;      /* user message — dark sage                  */
+  --ce-color-bubble-ai:      #2c3a3c;      /* AI message — deep teal                   */
+  --ce-color-bubble-error:   #4a3030;      /* error state — muted dark red              */
+
+  /* --- Borders & dividers --- */
+  --ce-color-border:         rgba(245, 230, 211, 0.08);  /* subtle cream dividers       */
+  --ce-color-border-focus:   rgba(255, 187, 152, 0.40);  /* coral focus rings           */
+
+  /* --- Gradients --- */
+  --ce-gradient-hero:        linear-gradient(135deg, #FFBB98, #FBE0C3);  /* hero text   */
+  --ce-gradient-button:      linear-gradient(135deg, #FFBB98, #e8a080);  /* CTA button  */
+  --ce-gradient-glow:        radial-gradient(
+                               ellipse at 50% 0%,
+                               rgba(255, 187, 152, 0.05) 0%,
+                               transparent 70%
+                             );  /* subtle top glow */
+
+  /* --- Shadows (deeper, warmer) --- */
+  --ce-shadow-sm:            0 1px 3px rgba(0, 0, 0, 0.25);
+  --ce-shadow-md:            0 4px 16px rgba(0, 0, 0, 0.30);
+  --ce-shadow-lg:            0 8px 32px rgba(0, 0, 0, 0.40);
+  --ce-shadow-glow:          0 4px 20px rgba(255, 187, 152, 0.15);  /* coral glow */
+
+  /* --- Hero overlay & text (darker for night feel) --- */
+  --ce-color-hero-overlay-top:    rgba(18, 24, 25, 0.4);
+  --ce-color-hero-overlay-mid:    rgba(18, 24, 25, 0.6);
+  --ce-color-hero-overlay-bottom: rgba(18, 24, 25, 0.85);
+  --ce-color-hero-text:           #F5E6D3;
+  --ce-color-hero-text-sub:       rgba(245, 230, 211, 0.8);
+  --ce-color-hero-hint:           rgba(245, 230, 211, 0.4);
+  --ce-hero-placeholder:          linear-gradient(170deg, #c8956c 0%, #7D8E95 30%, #4a6260 55%, #344648 75%, #1c2526 100%);
 }
