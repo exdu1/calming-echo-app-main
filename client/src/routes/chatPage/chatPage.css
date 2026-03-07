@@ -1,3 +1,13 @@
+/* ===================================================
+   CHAT PAGE — Containerless Layout
+   
+   Two visual states:
+   1. Empty: centered greeting with input just below
+   2. Active: full-page messages, input anchored at bottom
+   
+   No visible container — the page IS the chat.
+   =================================================== */
+
 .chat-page {
   display: flex;
   flex-direction: column;
@@ -216,6 +226,10 @@
 .send-button:not(:disabled):hover {
   transform: scale(1.08);
   box-shadow: var(--ce-shadow-glow);
+}
+
+.send-button .material-symbols-rounded {
+  font-size: 20px;
 }
 
 /* ─── Loading dots ─── */
