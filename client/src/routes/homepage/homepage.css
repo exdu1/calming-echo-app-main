@@ -5,10 +5,24 @@
   align-items: center;
 }
 
+/* --- Entrance animations --- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero {
   text-align: center;
   padding: var(--ce-space-3xl) var(--ce-space-lg);
   max-width: 800px;
+  animation: fadeUp var(--ce-transition-gentle) both;
 }
 
 .hero h1 {
@@ -70,7 +84,12 @@
   border: 1px solid var(--ce-color-border);
   transition: transform var(--ce-transition-base),
               box-shadow var(--ce-transition-base);
+  animation: fadeUp var(--ce-transition-gentle) both;
 }
+
+.feature:nth-child(1) { animation-delay: 200ms; }
+.feature:nth-child(2) { animation-delay: 350ms; }
+.feature:nth-child(3) { animation-delay: 500ms; }
 
 .feature:hover {
   transform: translateY(-6px);
@@ -101,5 +120,13 @@
   .features {
     grid-template-columns: 1fr;
     padding: var(--ce-space-lg) var(--ce-space-lg) var(--ce-space-2xl);
+  }
+}
+
+/* Turn off animations if user has enabled "Reduce motion" in their OS */
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .feature {
+    animation: none;
   }
 }

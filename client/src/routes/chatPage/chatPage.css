@@ -56,12 +56,47 @@
   color: var(--ce-color-text-secondary);
   text-align: center;
   padding: 0 var(--ce-space-lg);
+  animation: fadeIn var(--ce-transition-gentle) both;
+}
+
+/* --- Entrance animations --- */
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes containerIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.chat-container {
+  animation: containerIn var(--ce-transition-gentle) both;
 }
 
 .message {
   display: flex;
   flex-direction: column;
   max-width: 80%;
+  animation: messageIn var(--ce-transition-slow) both;
 }
 
 .user-message {
@@ -79,6 +114,11 @@
   position: relative;
   word-break: break-word;
   line-height: var(--ce-line-height-base);
+  transition: filter var(--ce-color-bg-base)
+}
+
+.message-bubble:hover {
+  filter: brightness(1.08);
 }
 
 .user-message .message-bubble {
@@ -93,16 +133,6 @@
 
 .error-message .message-bubble {
   background-color: var(--ce-color-bubble-error);
-}
-
-.ai-summary, .ai-question {
-  margin: 0;
-}
-
-.ai-summary {
-  margin-bottom: var(--ce-space-md);
-  padding-bottom: var(--ce-space-md);
-  border-bottom: 1px solid var(--ce-color-border);
 }
 
 .message-time {
@@ -230,4 +260,18 @@
   .input-container button {
     padding: var(--ce-space-md) var(--ce-space-lg);
   }
+}
+
+/* Turn off animations if user has enabled "Reduce motion" in their OS */
+@media (prefers-reduced-motion: reduce) {
+  .chat-container,
+  .message,
+  .empty-state {
+    animation: none;
+  }
+}
+
+.loading-dots span {
+  animation: none;
+  opacity: 1;
 }
