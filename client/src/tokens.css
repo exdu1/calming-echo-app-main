@@ -54,13 +54,21 @@
                                rgba(255, 187, 152, 0.08) 0%,
                                transparent 70%
                              );  /* subtle top glow */
+  --ce-gradient-page:        linear-gradient(
+                               170deg,
+                               #FFBB98 0%,
+                               #e8a080 15%,
+                               #7D8E95 45%,
+                               #4a6260 75%,
+                               #344648 100%
+                             );  /* full-page background gradient */
 
   /* --- Hero overlay & text (over background image) --- */
-  --ce-color-hero-overlay-top:    rgba(74, 98, 96, 0.3);    /* teal-slate, light */
-  --ce-color-hero-overlay-mid:    rgba(74, 98, 96, 0.5);
-  --ce-color-hero-overlay-bottom: rgba(74, 98, 96, 0.75);
-  --ce-color-hero-text:           #FBE0C3;                   /* peach cream */
-  --ce-color-hero-text-sub:       rgba(251, 224, 195, 0.85);
+  --ce-color-hero-overlay-top:    rgba(74, 98, 96, 0.65);
+  --ce-color-hero-overlay-mid:    rgba(74, 98, 96, 0.8);
+  --ce-color-hero-overlay-bottom: rgba(74, 98, 96, 0.92);
+  --ce-color-hero-text:           #1c2526;                   /* dark slate */
+  --ce-color-hero-text-sub:       rgba(28, 37, 38, 0.8);
   --ce-color-hero-hint:           rgba(251, 224, 195, 0.5);
   --ce-hero-placeholder:          linear-gradient(170deg, #FFBB98 0%, #e8a080 20%, #7D8E95 50%, #4a6260 80%, #344648 100%);
 
@@ -204,6 +212,14 @@
                                rgba(255, 187, 152, 0.05) 0%,
                                transparent 70%
                              );  /* subtle top glow */
+  --ce-gradient-page:        linear-gradient(
+                               170deg,
+                               #c8956c 0%,
+                               #5a6e6c 20%,
+                               #344648 45%,
+                               #1c2526 75%,
+                               #141c1d 100%
+                             );  /* full-page background gradient — night */
 
   /* --- Shadows (deeper, warmer) --- */
   --ce-shadow-sm:            0 1px 3px rgba(0, 0, 0, 0.25);
@@ -212,9 +228,9 @@
   --ce-shadow-glow:          0 4px 20px rgba(255, 187, 152, 0.15);  /* coral glow */
 
   /* --- Hero overlay & text (darker for night feel) --- */
-  --ce-color-hero-overlay-top:    rgba(18, 24, 25, 0.4);
-  --ce-color-hero-overlay-mid:    rgba(18, 24, 25, 0.6);
-  --ce-color-hero-overlay-bottom: rgba(18, 24, 25, 0.85);
+  --ce-color-hero-overlay-top:    rgba(18, 24, 25, 0.7);
+  --ce-color-hero-overlay-mid:    rgba(18, 24, 25, 0.85);
+  --ce-color-hero-overlay-bottom: rgba(18, 24, 25, 0.95);
   --ce-color-hero-text:           #F5E6D3;
   --ce-color-hero-text-sub:       rgba(245, 230, 211, 0.8);
   --ce-color-hero-hint:           rgba(245, 230, 211, 0.4);

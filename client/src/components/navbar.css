@@ -1,0 +1,34 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ce-space-md);
+  background-color: transparent;
+  transition: background-color var(--ce-transition-base),
+              backdrop-filter var(--ce-transition-base);
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.brand {
+  font-family: var(--ce-font-family-display);
+  font-size: var(--ce-font-size-lg);
+  font-weight: var(--ce-font-weight-bold);
+  color: var(--ce-color-text-primary);
+  text-decoration: none;
+}
+
+@media (min-width: 481px) {
+  .navbar {
+    padding: var(--ce-space-md) var(--ce-space-lg);
+  }
+}

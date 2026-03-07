@@ -15,12 +15,21 @@
 
 body {
   background-color: var(--ce-color-bg-base);
+  background-image: var(--ce-gradient-page);
+  background-attachment: fixed;
+  min-height: 100vh;
   color: var(--ce-color-text-primary);
   font-family: var(--ce-font-family-body);
   font-size: var(--ce-font-size-base);
   line-height: var(--ce-line-height-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;      /* prevent iOS text inflation on rotate */
+}
+
+/* Minimum touch target size (WCAG 2.5.8) */
+button, a, input[type="submit"] {
+  min-height: 44px;
 }
 
 /* Smooth transitions on interactive elements by default */
