@@ -1,11 +1,10 @@
 /* ===================================================
-   CHAT PAGE — Containerless Layout
+   CHAT PAGE — Containerless Layout (Mobile First)
    
-   Two visual states:
-   1. Empty: centered greeting with input just below
-   2. Active: full-page messages, input anchored at bottom
-   
-   No visible container — the page IS the chat.
+   Base styles target mobile. Media queries scale UP
+   using min-width breakpoints:
+     481px+ = tablet
+     769px+ = desktop
    =================================================== */
 
 .chat-page {
@@ -16,67 +15,7 @@
   overflow: hidden;
 }
 
-/* ─── State 1: Welcome (no messages) ─── */
-
-.welcome {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 var(--ce-space-lg);
-  animation: fadeIn var(--ce-transition-gentle) both;
-}
-
-.welcome-text {
-  margin-bottom: var(--ce-space-xl);
-}
-
-.welcome-text h1 {
-  font-family: var(--ce-font-family-display);
-  font-size: var(--ce-font-size-3xl);
-  font-weight: var(--ce-font-weight-bold);
-  line-height: var(--ce-line-height-tight);
-  margin-bottom: var(--ce-space-md);
-  background: var(--ce-gradient-hero);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.welcome-text p {
-  font-size: var(--ce-font-size-md);
-  color: var(--ce-color-text-secondary);
-}
-
-.input-form--welcome {
-  width: 100%;
-  max-width: var(--ce-width-chat);
-}
-
-/* ─── State 2: Messages area (has messages) ─── */
-
-.messages-area {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.messages-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--ce-space-xl) var(--ce-space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--ce-space-md);
-  max-width: var(--ce-width-chat);
-  width: 100%;
-}
-
-/* ─── Messages ─── */
+/* ─── Keyframes ─── */
 
 @keyframes messageIn {
   from {
@@ -94,10 +33,72 @@
   to   { opacity: 1; }
 }
 
+/* ─── State 1: Welcome (no messages) ─── */
+
+.welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--ce-space-md);
+  animation: fadeIn var(--ce-transition-gentle) both;
+}
+
+.welcome-text {
+  margin-bottom: var(--ce-space-xl);
+}
+
+.welcome-text h1 {
+  font-family: var(--ce-font-family-display);
+  font-size: var(--ce-font-size-xl);
+  font-weight: var(--ce-font-weight-bold);
+  line-height: var(--ce-line-height-tight);
+  margin-bottom: var(--ce-space-md);
+  background: var(--ce-gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.welcome-text p {
+  font-size: var(--ce-font-size-sm);
+  color: var(--ce-color-text-secondary);
+}
+
+.input-form--welcome {
+  width: 100%;
+  max-width: 580px;
+}
+
+/* ─── State 2: Messages area (has messages) ─── */
+
+.messages-area {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messages-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--ce-space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ce-space-sm);
+  max-width: var(--ce-width-chat);
+  width: 100%;
+}
+
+/* ─── Messages ─── */
+
 .message {
   display: flex;
   flex-direction: column;
-  max-width: 75%;
+  max-width: 90%;
   animation: messageIn var(--ce-transition-slow) both;
 }
 
@@ -110,9 +111,10 @@
 }
 
 .message-bubble {
-  padding: var(--ce-space-md) var(--ce-space-lg);
-  border-radius: var(--ce-radius-lg);
+  padding: var(--ce-space-sm) var(--ce-space-md);
+  border-radius: var(--ce-radius-md);
   color: var(--ce-color-text-primary);
+  font-size: var(--ce-font-size-sm);
   word-break: break-word;
   line-height: var(--ce-line-height-base);
   transition: filter var(--ce-transition-base);
@@ -152,21 +154,17 @@
   margin-left: var(--ce-space-xs);
 }
 
-/* ─── Input area (active conversation) ─── */
+/* ─── Input area ─── */
 
 .input-area {
-  padding: var(--ce-space-md) var(--ce-space-lg) var(--ce-space-lg);
+  padding: var(--ce-space-sm);
+  padding-bottom: calc(var(--ce-space-sm) + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(to top, var(--ce-color-bg-base) 60%, transparent);
 }
 
 .input-form {
   max-width: 580px;
   margin: 0 auto;
-}
-
-.input-form--welcome {
-  width: 100%;
-  max-width: 580px;
 }
 
 .input-wrapper {
@@ -177,13 +175,13 @@
 
 .input-wrapper input {
   width: 100%;
-  padding: var(--ce-space-xl) var(--ce-space-xl);
-  padding-right: 4rem;
+  padding: var(--ce-space-md) var(--ce-space-lg);
+  padding-right: 3.5rem;
   border: 1px solid var(--ce-color-border);
-  border-radius: var(--ce-radius-xl);
+  border-radius: var(--ce-radius-lg);
   background-color: var(--ce-color-bg-surface);
   color: var(--ce-color-text-primary);
-  font-size: var(--ce-font-size-md);
+  font-size: var(--ce-font-size-sm);
   transition: border-color var(--ce-transition-base),
               box-shadow var(--ce-transition-base);
 }
@@ -201,8 +199,8 @@
 .send-button {
   position: absolute;
   right: var(--ce-space-sm);
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,7 +227,7 @@
 }
 
 .send-button .material-symbols-rounded {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* ─── Loading dots ─── */
@@ -283,63 +281,75 @@
   border-radius: var(--ce-radius-full);
 }
 
-/* ─── Responsive: Tablet (≤768px) ─── */
+/* ─── Scale up: Tablet (481px+) ─── */
 
-@media (max-width: 768px) {
+@media (min-width: 481px) {
+  .welcome {
+    padding: 0 var(--ce-space-lg);
+  }
+
   .welcome-text h1 {
     font-size: var(--ce-font-size-2xl);
+  }
+
+  .welcome-text p {
+    font-size: var(--ce-font-size-md);
+  }
+
+  .messages-scroll {
+    padding: var(--ce-space-lg);
+    gap: var(--ce-space-md);
   }
 
   .message {
     max-width: 85%;
   }
-}
-
-/* ─── Responsive: Mobile (≤480px) ─── */
-
-@media (max-width: 480px) {
-  .welcome-text h1 {
-    font-size: var(--ce-font-size-xl);
-  }
-
-  .welcome-text p {
-    font-size: var(--ce-font-size-sm);
-  }
-
-  .welcome {
-    padding: 0 var(--ce-space-md);
-  }
-
-  .messages-scroll {
-    padding: var(--ce-space-md);
-    gap: var(--ce-space-sm);
-  }
-
-  .message {
-    max-width: 90%;
-  }
 
   .message-bubble {
-    padding: var(--ce-space-sm) var(--ce-space-md);
-    border-radius: var(--ce-radius-md);
-    font-size: var(--ce-font-size-sm);
+    padding: var(--ce-space-md) var(--ce-space-lg);
+    border-radius: var(--ce-radius-lg);
+    font-size: var(--ce-font-size-base);
   }
 
   .input-area {
-    padding: var(--ce-space-sm);
-    padding-bottom: calc(var(--ce-space-sm) + env(safe-area-inset-bottom, 0px));
+    padding: var(--ce-space-md) var(--ce-space-lg) var(--ce-space-lg);
   }
 
   .input-wrapper input {
-    padding: var(--ce-space-md) var(--ce-space-lg);
-    padding-right: 3.5rem;
-    font-size: var(--ce-font-size-sm);
-    border-radius: var(--ce-radius-lg);
+    padding: var(--ce-space-lg) var(--ce-space-xl);
+    padding-right: 4rem;
+    font-size: var(--ce-font-size-base);
+    border-radius: var(--ce-radius-xl);
   }
 
   .send-button {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .send-button .material-symbols-rounded {
+    font-size: 20px;
+  }
+}
+
+/* ─── Scale up: Desktop (769px+) ─── */
+
+@media (min-width: 769px) {
+  .welcome-text h1 {
+    font-size: var(--ce-font-size-3xl);
+  }
+
+  .messages-scroll {
+    padding: var(--ce-space-xl) var(--ce-space-lg);
+  }
+
+  .message {
+    max-width: 75%;
+  }
+
+  .input-wrapper input {
+    padding: var(--ce-space-xl) var(--ce-space-xl);
+    font-size: var(--ce-font-size-md);
   }
 }
 

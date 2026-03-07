@@ -4,15 +4,23 @@ import './homepage.css';
 const Homepage = () => {
     return (
         <div className="homepage">
+            <header className="homepage-header">
+                <h2 className="brand">Calming Echo</h2>
+            </header>
+
             <section className="hero">
-                <div className="hero-overlay" />
-                <div className="hero-content">
-                    <h1>Calming Echo</h1>
-                    <p>A space to be heard.</p>
-                    <Link to="/chat" className="cta-button">Start a Conversation</Link>
+                <div className="hero-image-container">
+                    <img 
+                        src="/hero.jpg" 
+                        alt="A calm landscape at dusk" 
+                        className="hero-image"
+                    />
                 </div>
-                <div className="scroll-hint">
-                    <span className="material-symbols-rounded">expand_more</span>
+
+                <div className="hero-content">
+                    <p className="hero-label">Active Listener</p>
+                    <h1>A space to be heard</h1>
+                    <Link to="/chat" className="cta-button">Start a Conversation</Link>
                 </div>
             </section>
 
