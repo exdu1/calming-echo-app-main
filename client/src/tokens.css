@@ -54,6 +54,14 @@
                                rgba(255, 187, 152, 0.08) 0%,
                                transparent 70%
                              );  /* subtle top glow */
+  --ce-gradient-page:        linear-gradient(
+                               170deg,
+                               #FFBB98 0%,
+                               #e8a080 15%,
+                               #7D8E95 45%,
+                               #4a6260 75%,
+                               #344648 100%
+                             );  /* full-page background gradient */
 
   /* --- Hero overlay & text (over background image) --- */
   --ce-color-hero-overlay-top:    rgba(74, 98, 96, 0.65);
@@ -204,6 +212,14 @@
                                rgba(255, 187, 152, 0.05) 0%,
                                transparent 70%
                              );  /* subtle top glow */
+  --ce-gradient-page:        linear-gradient(
+                               170deg,
+                               #c8956c 0%,
+                               #5a6e6c 20%,
+                               #344648 45%,
+                               #1c2526 75%,
+                               #141c1d 100%
+                             );  /* full-page background gradient — night */
 
   /* --- Shadows (deeper, warmer) --- */
   --ce-shadow-sm:            0 1px 3px rgba(0, 0, 0, 0.25);

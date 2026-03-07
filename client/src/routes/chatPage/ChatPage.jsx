@@ -70,8 +70,8 @@ const ChatPage = () => {
             {!hasMessages ? (
                 <div className="welcome">
                     <div className="welcome-text">
-                        <h1>Calming Echo</h1>
-                        <p>What's on your mind?</p>
+                        <h1>What's good fam!</h1>
+                        <p>What're you saying?</p>
                     </div>
                     <form className="input-form input-form--welcome" onSubmit={handleSubmit}>
                         <div className="input-wrapper">
