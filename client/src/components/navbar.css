@@ -8,16 +8,22 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--ce-space-md);
+  background-color: transparent;
+  transition: background-color var(--ce-transition-base),
+              backdrop-filter var(--ce-transition-base);
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .brand {
   font-family: var(--ce-font-family-display);
   font-size: var(--ce-font-size-lg);
   font-weight: var(--ce-font-weight-bold);
-  background: var(--ce-gradient-hero);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--ce-color-text-primary);
   text-decoration: none;
 }
 
@@ -26,4 +32,3 @@
     padding: var(--ce-space-md) var(--ce-space-lg);
   }
 }
-

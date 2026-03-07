@@ -78,24 +78,22 @@
   display: block;
   text-align: center;
   padding: var(--ce-space-lg) var(--ce-space-xl);
-  background-color: var(--ce-color-bg-elevated);
-  color: var(--ce-color-text-primary);
+  background: var(--ce-gradient-button);
+  color: #fff;
   text-decoration: none;
-  border-radius: var(--ce-radius-sm);
-  font-weight: var(--ce-font-weight-medium);
-  font-size: var(--ce-font-size-sm);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: 1px solid var(--ce-color-border);
-  transition: background-color var(--ce-transition-base),
-              transform var(--ce-transition-base),
+  border-radius: var(--ce-radius-xl);
+  font-weight: var(--ce-font-weight-bold);
+  font-size: var(--ce-font-size-base);
+  letter-spacing: 0.04em;
+  border: none;
+  box-shadow: var(--ce-shadow-glow);
+  transition: transform var(--ce-transition-base),
               box-shadow var(--ce-transition-base);
 }
 
 .cta-button:hover {
-  background-color: var(--ce-color-bg-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--ce-shadow-md);
+  transform: translateY(-3px);
+  box-shadow: var(--ce-shadow-lg), var(--ce-shadow-glow);
 }
 
 /* ─── Features section ─── */
