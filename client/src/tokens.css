@@ -16,50 +16,59 @@
   /* ===================================================
      COLOR PALETTE — LIGHT MODE (default)
      
-     Dawn/dusk inspired — warm peach cream backgrounds
-     with slate text and coral accents.
-     Derived from: #FBE0C3, #FFBB98, #7D8E95, #344648
+     Dawn/dusk inspired by the landscape photo:
+     Slate-green and muted teal backgrounds (mountains),
+     warm peach cream text (sky), coral accents (sunset).
      =================================================== */
 
-  /* --- Background layers (lightest to slightly darker) --- */
-  --ce-color-bg-base:        #F5E6D3;      /* deepest background — warm cream          */
-  --ce-color-bg-surface:     #FBE0C3;      /* card/container — peach cream             */
-  --ce-color-bg-elevated:    #FFF0E0;      /* raised elements — light peach            */
-  --ce-color-bg-hover:       #F0D4B8;      /* hover states — deeper cream              */
+  /* --- Background layers (muted teal-slate, like the mountains) --- */
+  --ce-color-bg-base:        #4a6260;      /* deepest background — mountain slate       */
+  --ce-color-bg-surface:     #567270;      /* card/container — teal-slate               */
+  --ce-color-bg-elevated:    #628280;      /* raised elements — lighter slate           */
+  --ce-color-bg-hover:       #6e8e8a;      /* hover states — sage                      */
 
-  /* --- Text --- */
-  --ce-color-text-primary:   #2a3638;      /* main body text — deep slate              */
-  --ce-color-text-secondary: #4a5e5a;      /* supporting text — medium slate           */
-  --ce-color-text-muted:     #7D8E95;      /* placeholders, disabled — steel           */
+  /* --- Text (warm peach, like the sky) --- */
+  --ce-color-text-primary:   #FBE0C3;      /* main body text — peach cream              */
+  --ce-color-text-secondary: #d4c4b0;      /* supporting text — muted peach             */
+  --ce-color-text-muted:     #9aaca8;      /* placeholders, disabled — pale sage        */
 
-  /* --- Accent (coral) --- */
-  --ce-color-accent:         #d4855a;      /* primary accent — deeper coral            */
-  --ce-color-accent-soft:    rgba(212, 133, 90, 0.12);  /* accent tint for backgrounds */
-  --ce-color-accent-hover:   #c07848;      /* accent hover — rich terracotta           */
+  /* --- Accent (coral/sunset tones) --- */
+  --ce-color-accent:         #FFBB98;      /* primary accent — coral peach              */
+  --ce-color-accent-soft:    rgba(255, 187, 152, 0.15);  /* accent tint for backgrounds */
+  --ce-color-accent-hover:   #FCD0B4;      /* accent hover — lighter peach              */
 
   /* --- Message bubbles --- */
-  --ce-color-bubble-user:    #e8cdb0;      /* user message — warm sand                 */
-  --ce-color-bubble-ai:      #dce8e4;      /* AI message — pale sage                   */
-  --ce-color-bubble-error:   #f0d0d0;      /* error state — soft pink                  */
+  --ce-color-bubble-user:    #5a7472;      /* user message — sage slate                 */
+  --ce-color-bubble-ai:      #4e6664;      /* AI message — deeper teal                  */
+  --ce-color-bubble-error:   #6a5050;      /* error state — muted warm red              */
 
   /* --- Borders & dividers --- */
-  --ce-color-border:         rgba(42, 54, 56, 0.10);   /* subtle slate dividers        */
-  --ce-color-border-focus:   rgba(212, 133, 90, 0.50); /* coral focus rings            */
+  --ce-color-border:         rgba(251, 224, 195, 0.10);  /* subtle peach dividers       */
+  --ce-color-border-focus:   rgba(255, 187, 152, 0.45);  /* coral focus rings           */
 
   /* --- Gradients --- */
-  --ce-gradient-hero:        linear-gradient(135deg, #d4855a, #c07848);  /* hero text   */
-  --ce-gradient-button:      linear-gradient(135deg, #d4855a, #c87050);  /* CTA button  */
+  --ce-gradient-hero:        linear-gradient(135deg, #FFBB98, #FBE0C3);  /* hero text   */
+  --ce-gradient-button:      linear-gradient(135deg, #FFBB98, #e8a080);  /* CTA button  */
   --ce-gradient-glow:        radial-gradient(
                                ellipse at 50% 0%,
-                               rgba(212, 133, 90, 0.08) 0%,
+                               rgba(255, 187, 152, 0.08) 0%,
                                transparent 70%
                              );  /* subtle top glow */
 
+  /* --- Hero overlay & text (over background image) --- */
+  --ce-color-hero-overlay-top:    rgba(74, 98, 96, 0.3);    /* teal-slate, light */
+  --ce-color-hero-overlay-mid:    rgba(74, 98, 96, 0.5);
+  --ce-color-hero-overlay-bottom: rgba(74, 98, 96, 0.75);
+  --ce-color-hero-text:           #FBE0C3;                   /* peach cream */
+  --ce-color-hero-text-sub:       rgba(251, 224, 195, 0.85);
+  --ce-color-hero-hint:           rgba(251, 224, 195, 0.5);
+  --ce-hero-placeholder:          linear-gradient(170deg, #FFBB98 0%, #e8a080 20%, #7D8E95 50%, #4a6260 80%, #344648 100%);
+
   /* --- Shadows --- */
-  --ce-shadow-sm:            0 1px 3px rgba(42, 54, 56, 0.08);
-  --ce-shadow-md:            0 4px 16px rgba(42, 54, 56, 0.10);
-  --ce-shadow-lg:            0 8px 32px rgba(42, 54, 56, 0.14);
-  --ce-shadow-glow:          0 4px 20px rgba(212, 133, 90, 0.18);  /* coral glow */
+  --ce-shadow-sm:            0 1px 3px rgba(30, 40, 38, 0.20);
+  --ce-shadow-md:            0 4px 16px rgba(30, 40, 38, 0.25);
+  --ce-shadow-lg:            0 8px 32px rgba(30, 40, 38, 0.35);
+  --ce-shadow-glow:          0 4px 20px rgba(255, 187, 152, 0.20);  /* coral glow */
 
 
   /* ===================================================
@@ -201,4 +210,13 @@
   --ce-shadow-md:            0 4px 16px rgba(0, 0, 0, 0.30);
   --ce-shadow-lg:            0 8px 32px rgba(0, 0, 0, 0.40);
   --ce-shadow-glow:          0 4px 20px rgba(255, 187, 152, 0.15);  /* coral glow */
+
+  /* --- Hero overlay & text (darker for night feel) --- */
+  --ce-color-hero-overlay-top:    rgba(18, 24, 25, 0.4);
+  --ce-color-hero-overlay-mid:    rgba(18, 24, 25, 0.6);
+  --ce-color-hero-overlay-bottom: rgba(18, 24, 25, 0.85);
+  --ce-color-hero-text:           #F5E6D3;
+  --ce-color-hero-text-sub:       rgba(245, 230, 211, 0.8);
+  --ce-color-hero-hint:           rgba(245, 230, 211, 0.4);
+  --ce-hero-placeholder:          linear-gradient(170deg, #c8956c 0%, #7D8E95 30%, #4a6260 55%, #344648 75%, #1c2526 100%);
 }
