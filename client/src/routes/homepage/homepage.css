@@ -21,15 +21,8 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
-
-  /*
-   * REPLACE THIS with your Unsplash image:
-   * background-image: url('/your-image.jpg');
-   *
-   * Place the image file in client/public/ and reference
-   * it with a leading slash. The gradient below acts as
-   * a placeholder until then.
-   */
+  background-image: url('/client/public/hero.jpg');
+  /* placeholder */
   background-image: var(--ce-hero-placeholder);
   background-size: cover;
   background-position: center;
