@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ChatPage from './routes/chatPage/ChatPage';
 import Dashboard from './routes/dashboard/Dashboard';
 import Homepage from './routes/homepage/Homepage';
-import ThemeToggle from './components/ThemeToggle';
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
     <BrowserRouter>
-    <ThemeToggle />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/chat" element={<ChatPage />} />

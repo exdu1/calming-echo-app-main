@@ -4,10 +4,6 @@ import './homepage.css';
 const Homepage = () => {
     return (
         <div className="homepage">
-            <header className="homepage-header">
-                <h2 className="brand">Calming Echo</h2>
-            </header>
-
             <section className="hero">
                 <div className="hero-image-container">
                     <img 

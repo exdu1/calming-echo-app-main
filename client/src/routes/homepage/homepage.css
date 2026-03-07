@@ -11,27 +11,6 @@
   background-color: var(--ce-color-bg-base);
 }
 
-/* ─── Header / Brand ─── */
-
-.homepage-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  padding: var(--ce-space-md);
-}
-
-.brand {
-  font-family: var(--ce-font-family-display);
-  font-size: var(--ce-font-size-lg);
-  font-weight: var(--ce-font-weight-bold);
-  background: var(--ce-gradient-hero);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin: 0;
-}
-
 /* ─── Keyframes ─── */
 
 @keyframes fadeUp {
