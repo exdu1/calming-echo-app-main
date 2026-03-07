@@ -6,8 +6,8 @@ const Homepage = () => {
     return (
         <div className="homepage">
             <div className="hero">
-                <h1>AI Active Listener</h1>
-                <p>Share your thoughts and get thoughtful responses</p>
+                <h1>Calming Echo</h1>
+                <p>Your AI Active Listener. Share your thoughts and get thoughtful responses</p>
                 <div className="actions">
                     <Link to="/chat" className="cta-button">Start Chatting</Link>
                 </div>
