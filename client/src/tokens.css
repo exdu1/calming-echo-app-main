@@ -1,4 +1,5 @@
-/*
+/* client/src/routes/chatPage.css 
+
  * Design Tokens — Calming Echo
  * 
  * Single source of truth for all visual decisions.
@@ -16,7 +17,6 @@
   /* ===================================================
      COLOR PALETTE — LIGHT MODE (default)
      
-     Dawn/dusk inspired by the landscape photo:
      Slate-green and muted teal backgrounds (mountains),
      warm peach cream text (sky), coral accents (sunset).
      =================================================== */
@@ -163,7 +163,6 @@
 
   --ce-width-chat:           720px;        /* chat container max-width               */
   --ce-width-content:        1100px;       /* general content max-width              */
-  --ce-height-chat:          88vh;         /* chat container height                  */
 }
 
 

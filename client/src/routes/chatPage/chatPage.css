@@ -1,16 +1,8 @@
-/* ===================================================
-   CHAT PAGE — Containerless Layout (Mobile First)
-   
-   Base styles target mobile. Media queries scale UP
-   using min-width breakpoints:
-     481px+ = tablet
-     769px+ = desktop
-   =================================================== */
-
+/* /client/src/routes/chatPage.css */
 .chat-page {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  height: 100%;
   background: transparent;
   overflow: hidden;
 }

@@ -1,0 +1,26 @@
+/* ===================================================
+   APP SHELL — Top-level layout structure
+   
+   Defines the spatial relationship between fixed chrome
+   (navbar, future sidebar) and page content.
+   
+   --ce-height-navbar is set dynamically by Navbar.jsx
+   via ResizeObserver. The 60px fallback covers the
+   brief window before JS hydrates.
+   
+   Uses 100dvh for mobile browser compatibility — this
+   unit responds to virtual keyboard and browser chrome
+   changes, unlike 100vh which is static.
+   =================================================== */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  padding-top: var(--ce-height-navbar, 60px);
+}
+
+.main-content {
+  flex: 1;
+  min-height: 0;  /* allow flex children to shrink below content size */
+}
