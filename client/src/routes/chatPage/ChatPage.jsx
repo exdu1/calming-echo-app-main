@@ -1,3 +1,4 @@
+/* /client/src/routes/chatPage/ChatPage.jsx */
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './chatPage.css';
@@ -7,14 +8,21 @@ const ChatPage = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef(null);
+    const scrollContainerRef = useRef(null);
     const inputRef = useRef(null);
 
     const hasMessages = messages.length > 0;
     
     // Auto-scroll to bottom when messages change
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, [messages]);
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        container.scrollTo({
+            top: container.scrollHeight,
+            behavior: 'smooth'
+        });
+    }, [messages, isLoading]);
     
     // Focus input on load
     useEffect(() => {
@@ -96,7 +104,7 @@ const ChatPage = () => {
             ) : (
                 <>
                     <div className="messages-area">
-                        <div className="messages-scroll">
+                        <div className="messages-scroll" ref={scrollContainerRef}>
                             {messages.map((msg, index) => (
                                 <div 
                                     key={index} 
@@ -121,7 +129,6 @@ const ChatPage = () => {
                                     </div>
                                 </div>
                             )}
-                            <div ref={messagesEndRef} />
                         </div>
                     </div>
 

@@ -31,10 +31,11 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 0 var(--ce-space-md);
+  padding: 20svh var(--ce-space-md) 0;
+  overflow-y: auto;
   animation: fadeIn var(--ce-transition-gentle) both;
 }
 
@@ -62,6 +63,7 @@
 .input-form--welcome {
   width: 100%;
   max-width: 580px;
+  flex-shrink: 0;
 }
 
 /* ─── State 2: Messages area (has messages) ─── */
@@ -277,7 +279,7 @@
 
 @media (min-width: 481px) {
   .welcome {
-    padding: 0 var(--ce-space-lg);
+    padding: 20svh var(--ce-space-lg) 0;
   }
 
   .welcome-text h1 {
