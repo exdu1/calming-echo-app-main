@@ -6,9 +6,9 @@
    Inspired by Achelous Spa layout + Squarespace typography.
    =================================================== */
 
-.homepage {
-  min-height: 100vh;
-}
+/* .homepage {
+  
+} */
 
 /* ─── Keyframes ─── */
 
@@ -26,12 +26,12 @@
 /* ─── Hero section ─── */
 
 .hero {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--ce-space-md);
-  padding-top: 6rem;
+  padding-top: var(--ce-space-xl);
   gap: var(--ce-space-xl);
   animation: fadeUp var(--ce-transition-gentle) both;
 }
@@ -132,7 +132,7 @@
 }
 
 .feature-icon {
-  font-size: 40px;
+  font-size: var(--ce-size-icon-lg);
   color: var(--ce-color-accent);
   margin-bottom: var(--ce-space-lg);
   display: block;
@@ -156,7 +156,7 @@
 @media (min-width: 481px) {
   .hero {
     padding: var(--ce-space-lg);
-    padding-top: 7rem;
+    padding-top: var(--ce-space-2xl);
     gap: var(--ce-space-2xl);
   }
 
@@ -200,7 +200,7 @@
 @media (min-width: 769px) {
   .hero {
     padding: var(--ce-space-xl);
-    padding-top: 8rem;
+    padding-top: var(--ce-space-3xl);
     gap: var(--ce-space-2xl);
   }
 
@@ -217,7 +217,7 @@
   }
 
   .hero-content h1 {
-    font-size: 4rem;
+    font-size: var(--ce-font-size-4xl);
   }
 
   .hero-label {
