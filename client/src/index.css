@@ -1,11 +1,6 @@
-/* Import design tokens — single source of truth for all visual decisions */
-@import './tokens.css';
+/* /client/src/index.css */
 
-/* ===================================================
-   GLOBAL RESET & BASE STYLES
-   
-   References tokens exclusively — no hardcoded values.
-   =================================================== */
+@import './tokens.css';
 
 * {
   padding: 0;
@@ -15,8 +10,6 @@
 
 body {
   background-color: var(--ce-color-bg-base);
-  background-image: var(--ce-gradient-page);
-  background-attachment: fixed;
   min-height: 100dvh;
   color: var(--ce-color-text-primary);
   font-family: var(--ce-font-family-body);
@@ -25,6 +18,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;      /* prevent iOS text inflation on rotate */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--ce-gradient-page);
 }
 
 /* Minimum touch target size (WCAG 2.5.8) */
