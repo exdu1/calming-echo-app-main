@@ -7,7 +7,7 @@
    =================================================== */
 
 .homepage {
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 /* ─── Keyframes ─── */
@@ -26,12 +26,12 @@
 /* ─── Hero section ─── */
 
 .hero {
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--ce-space-md);
-  padding-top: 6rem;
+  padding-top: var(--ce-space-xl);
   gap: var(--ce-space-xl);
   animation: fadeUp var(--ce-transition-gentle) both;
 }
@@ -156,7 +156,7 @@
 @media (min-width: 481px) {
   .hero {
     padding: var(--ce-space-lg);
-    padding-top: 7rem;
+    padding-top: var(--ce-space-2xl);
     gap: var(--ce-space-2xl);
   }
 
@@ -200,7 +200,7 @@
 @media (min-width: 769px) {
   .hero {
     padding: var(--ce-space-xl);
-    padding-top: 8rem;
+    padding-top: var(--ce-space-3xl);
     gap: var(--ce-space-2xl);
   }
 
