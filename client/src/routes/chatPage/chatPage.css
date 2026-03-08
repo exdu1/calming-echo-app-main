@@ -62,7 +62,7 @@
 
 .input-form--welcome {
   width: 100%;
-  max-width: 580px;
+  max-width: var(--ce-width-chat-column);
   flex-shrink: 0;
 }
 
@@ -73,7 +73,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .messages-scroll {
@@ -83,8 +82,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--ce-space-sm);
-  max-width: var(--ce-width-chat);
+  max-width: var(--ce-width-chat-column);
   width: 100%;
+  margin: 0 auto;
 }
 
 /* ─── Messages ─── */
@@ -151,14 +151,15 @@
 /* ─── Input area ─── */
 
 .input-area {
-  padding: var(--ce-space-sm);
+  padding: var(--ce-space-sm) 0;
   padding-bottom: calc(var(--ce-space-sm) + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(to top, var(--ce-color-bg-base) 60%, transparent);
 }
 
 .input-form {
-  max-width: 580px;
+  max-width: var(--ce-width-chat-column);
   margin: 0 auto;
+  padding: 0 var(--ce-space-md);
 }
 
 .input-wrapper {
@@ -306,7 +307,11 @@
   }
 
   .input-area {
-    padding: var(--ce-space-md) var(--ce-space-lg) var(--ce-space-lg);
+    padding: var(--ce-space-md) 0 var(--ce-space-lg);
+  }
+
+  .input-form {
+    padding: 0 var(--ce-space-lg);
   }
 
   .input-wrapper input {

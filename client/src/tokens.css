@@ -163,6 +163,7 @@
      =================================================== */
 
   --ce-width-chat:           720px;        /* chat container max-width               */
+  --ce-width-chat-column:    580px;
   --ce-width-content:        1100px;       /* general content max-width              */
   --ce-height-navbar:        76px;         /* navbar: --ce-space-md top/bottom padding (32px) + 44px content */
 
