@@ -1,17 +1,4 @@
-/* client/src/routes/chatPage.css 
-
- * Design Tokens — Calming Echo
- * 
- * Single source of truth for all visual decisions.
- * Every component references these variables instead of hardcoded values.
- *
- * Aesthetic direction: Warm & Soft
- *   - Rounded corners, warm neutrals, gentle gradients
- *   - Emotionally safe, approachable, intimate
- *
- * Naming convention: --ce-{category}-{property}-{variant}
- *   ce = Calming Echo (namespaced to avoid collisions)
- */
+/* client/src/tokens.css */
 
 :root {
   /* ===================================================
