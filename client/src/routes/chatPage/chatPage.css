@@ -168,7 +168,7 @@
 .input-wrapper input {
   width: 100%;
   padding: var(--ce-space-md) var(--ce-space-lg);
-  padding-right: 3.5rem;
+  padding-right: calc(var(--ce-size-send-button) + var(--ce-space-md) + var(--ce-space-sm));
   border: 1px solid var(--ce-color-border);
   border-radius: var(--ce-radius-lg);
   background-color: var(--ce-color-bg-surface);
@@ -191,8 +191,8 @@
 .send-button {
   position: absolute;
   right: var(--ce-space-sm);
-  width: 34px;
-  height: 34px;
+  width: var(--ce-size-send-button);
+  height: var(--ce-size-send-button);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,7 +219,7 @@
 }
 
 .send-button .material-symbols-rounded {
-  font-size: 18px;
+  font-size: var(--ce-size-icon-sm);
 }
 
 /* ─── Loading dots ─── */
@@ -227,13 +227,13 @@
 .loading-dots {
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: var(--ce-space-xs);
   padding: var(--ce-space-sm) 0;
 }
 
 .loading-dots span {
-  width: 8px;
-  height: 8px;
+  width: var(--ce-size-loading-dot);
+  height: var(--ce-size-loading-dot);
   background-color: var(--ce-color-accent);
   border-radius: var(--ce-radius-full);
   animation: pulse 1.5s infinite ease-in-out;
@@ -261,7 +261,7 @@
 /* ─── Scrollbar ─── */
 
 .messages-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: var(--ce-size-scrollbar);
 }
 
 .messages-scroll::-webkit-scrollbar-track {
@@ -309,18 +309,18 @@
 
   .input-wrapper input {
     padding: var(--ce-space-lg) var(--ce-space-xl);
-    padding-right: 4rem;
+    padding-right: calc(var(--ce-size-send-button-md) + var(--ce-space-md) + var(--ce-space-sm));
     font-size: var(--ce-font-size-base);
     border-radius: var(--ce-radius-xl);
   }
 
   .send-button {
-    width: 40px;
-    height: 40px;
+    width: var(--ce-size-send-button-md);
+    height: var(--ce-size-send-button-md);
   }
 
   .send-button .material-symbols-rounded {
-    font-size: 20px;
+    font-size: var(--ce-size-icon-md);
   }
 }
 

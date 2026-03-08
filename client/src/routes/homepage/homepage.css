@@ -132,7 +132,7 @@
 }
 
 .feature-icon {
-  font-size: 40px;
+  font-size: var(--ce-size-icon-lg);
   color: var(--ce-color-accent);
   margin-bottom: var(--ce-space-lg);
   display: block;
@@ -217,7 +217,7 @@
   }
 
   .hero-content h1 {
-    font-size: 4rem;
+    font-size: var(--ce-font-size-4xl);
   }
 
   .hero-label {

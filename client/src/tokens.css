@@ -99,6 +99,7 @@
   --ce-font-size-xl:         1.75rem;      /* 28px — page headings                   */
   --ce-font-size-2xl:        2.5rem;       /* 40px — hero headline (desktop)         */
   --ce-font-size-3xl:        3.25rem;      /* 52px — hero headline (large screens)   */
+  --ce-font-size-4xl:        4rem;         /* 64px — hero headline (desktop)   
 
   /* --- Line heights --- */
   --ce-line-height-tight:    1.2;          /* headings                               */
@@ -163,6 +164,19 @@
 
   --ce-width-chat:           720px;        /* chat container max-width               */
   --ce-width-content:        1100px;       /* general content max-width              */
+  --ce-height-navbar:        76px;         /* navbar: --ce-space-md top/bottom padding (32px) + 44px content */
+
+  /* --- Component sizes --- */
+  --ce-size-send-button:     34px;         /* send button mobile (scales at 481px+)  */
+  --ce-size-send-button-md:  40px;         /* send button tablet+                    */
+  --ce-size-icon-sm:         1.125rem;     /* 18px — small icons (send button)       */
+  --ce-size-icon-md:         1.25rem;      /* 20px — medium icons (tablet send)      */
+  --ce-size-icon-lg:         2.5rem;       /* 40px — large icons (feature cards)     */
+  --ce-size-toggle:          38px;         /* theme toggle mobile                    */
+  --ce-size-toggle-md:       44px;         /* theme toggle tablet+ (meets WCAG)      */
+  --ce-size-scrollbar:       6px;          /* custom scrollbar width                 */
+  --ce-size-loading-dot:     8px;          /* loading indicator dot                  */
+
 }
 
 
