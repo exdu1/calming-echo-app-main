@@ -1,4 +1,22 @@
-/* client/src/tokens.css */
+/* tokens.css
+ *
+ * Design Tokens — Calming Echo
+ * 
+ * Single source of truth for all visual decisions.
+ * Every component references these variables instead of hardcoded values.
+ *
+ * Aesthetic direction: Warm & Soft
+ *   - Rounded corners, warm neutrals, gentle gradients
+ *   - Emotionally safe, approachable, intimate
+ *
+ * Naming convention: --ce-{category}-{property}-{variant}
+ *   ce = Calming Echo (namespaced to avoid collisions)
+ *
+ * Breakpoints (used in @media queries — can't be CSS variables):
+ *   Mobile:  < 481px
+ *   Tablet:  481px – 768px
+ *   Desktop: 769px+
+ */
 
 :root {
   /* ===================================================
@@ -36,11 +54,6 @@
   /* --- Gradients --- */
   --ce-gradient-hero:        linear-gradient(135deg, #FFBB98, #FBE0C3);  /* hero text   */
   --ce-gradient-button:      linear-gradient(135deg, #FFBB98, #e8a080);  /* CTA button  */
-  --ce-gradient-glow:        radial-gradient(
-                               ellipse at 50% 0%,
-                               rgba(255, 187, 152, 0.08) 0%,
-                               transparent 70%
-                             );  /* subtle top glow */
   --ce-gradient-page:        linear-gradient(
                                170deg,
                                #FFBB98 0%,
@@ -49,15 +62,6 @@
                                #4a6260 75%,
                                #344648 100%
                              );  /* full-page background gradient */
-
-  /* --- Hero overlay & text (over background image) --- */
-  --ce-color-hero-overlay-top:    rgba(74, 98, 96, 0.65);
-  --ce-color-hero-overlay-mid:    rgba(74, 98, 96, 0.8);
-  --ce-color-hero-overlay-bottom: rgba(74, 98, 96, 0.92);
-  --ce-color-hero-text:           #1c2526;                   /* dark slate */
-  --ce-color-hero-text-sub:       rgba(28, 37, 38, 0.8);
-  --ce-color-hero-hint:           rgba(251, 224, 195, 0.5);
-  --ce-hero-placeholder:          linear-gradient(170deg, #FFBB98 0%, #e8a080 20%, #7D8E95 50%, #4a6260 80%, #344648 100%);
 
   /* --- Shadows --- */
   --ce-shadow-sm:            0 1px 3px rgba(30, 40, 38, 0.20);
@@ -84,9 +88,7 @@
   --ce-font-size-md:         1.125rem;     /* 18px — chat input                      */
   --ce-font-size-lg:         1.375rem;     /* 22px — section headings                */
   --ce-font-size-xl:         1.75rem;      /* 28px — page headings                   */
-  --ce-font-size-2xl:        2.5rem;       /* 40px — hero headline (desktop)         */
-  --ce-font-size-3xl:        3.25rem;      /* 52px — hero headline (large screens)   */
-  --ce-font-size-4xl:        4rem;         /* 64px — hero headline (desktop)         */
+  --ce-font-size-2xl:        2.5rem;       /* 40px — hero headline (mobile)          */
 
   /* --- Line heights --- */
   --ce-line-height-tight:    1.2;          /* headings                               */
@@ -125,8 +127,7 @@
 
   --ce-radius-sm:            8px;          /* small elements (tags, pills)           */
   --ce-radius-md:            12px;         /* cards, containers                      */
-  --ce-radius-lg:            20px;         /* message bubbles                        */
-  --ce-radius-xl:            28px;         /* buttons, input fields                  */
+  --ce-radius-lg:            20px;         /* message bubbles, input fields          */
   --ce-radius-full:          9999px;       /* fully round (avatars, dots)            */
 
 
@@ -149,22 +150,8 @@
      Max-width constraints and consistent container sizing.
      =================================================== */
 
-  --ce-width-chat:           720px;        /* chat container max-width               */
-  --ce-width-chat-column:    580px;
+  --ce-width-chat-column:    580px;        /* chat + input max-width                 */
   --ce-width-content:        1100px;       /* general content max-width              */
-  --ce-height-navbar:        76px;         /* navbar: --ce-space-md top/bottom padding (32px) + 44px content */
-
-  /* --- Component sizes --- */
-  --ce-size-send-button:     34px;         /* send button mobile (scales at 481px+)  */
-  --ce-size-send-button-md:  40px;         /* send button tablet+                    */
-  --ce-size-icon-sm:         1.125rem;     /* 18px — small icons (send button)       */
-  --ce-size-icon-md:         1.25rem;      /* 20px — medium icons (tablet send)      */
-  --ce-size-icon-lg:         2.5rem;       /* 40px — large icons (feature cards)     */
-  --ce-size-toggle:          38px;         /* theme toggle mobile                    */
-  --ce-size-toggle-md:       44px;         /* theme toggle tablet+ (meets WCAG)      */
-  --ce-size-scrollbar:       6px;          /* custom scrollbar width                 */
-  --ce-size-loading-dot:     8px;          /* loading indicator dot                  */
-
 }
 
 
@@ -208,11 +195,6 @@
   /* --- Gradients --- */
   --ce-gradient-hero:        linear-gradient(135deg, #FFBB98, #FBE0C3);  /* hero text   */
   --ce-gradient-button:      linear-gradient(135deg, #FFBB98, #e8a080);  /* CTA button  */
-  --ce-gradient-glow:        radial-gradient(
-                               ellipse at 50% 0%,
-                               rgba(255, 187, 152, 0.05) 0%,
-                               transparent 70%
-                             );  /* subtle top glow */
   --ce-gradient-page:        linear-gradient(
                                170deg,
                                #c8956c 0%,
@@ -227,13 +209,4 @@
   --ce-shadow-md:            0 4px 16px rgba(0, 0, 0, 0.30);
   --ce-shadow-lg:            0 8px 32px rgba(0, 0, 0, 0.40);
   --ce-shadow-glow:          0 4px 20px rgba(255, 187, 152, 0.15);  /* coral glow */
-
-  /* --- Hero overlay & text (darker for night feel) --- */
-  --ce-color-hero-overlay-top:    rgba(18, 24, 25, 0.7);
-  --ce-color-hero-overlay-mid:    rgba(18, 24, 25, 0.85);
-  --ce-color-hero-overlay-bottom: rgba(18, 24, 25, 0.95);
-  --ce-color-hero-text:           #F5E6D3;
-  --ce-color-hero-text-sub:       rgba(245, 230, 211, 0.8);
-  --ce-color-hero-hint:           rgba(245, 230, 211, 0.4);
-  --ce-hero-placeholder:          linear-gradient(170deg, #c8956c 0%, #7D8E95 30%, #4a6260 55%, #344648 75%, #1c2526 100%);
 }

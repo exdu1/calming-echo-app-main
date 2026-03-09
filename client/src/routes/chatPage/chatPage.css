@@ -1,4 +1,4 @@
-/* /client/src/routes/chatPage.css */
+/* /client/src/routes/chatPage/chatPage.css */
 .chat-page {
   display: flex;
   flex-direction: column;
@@ -31,10 +31,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20svh var(--ce-space-md) 0;
+  padding: 0 var(--ce-space-md);
   overflow-y: auto;
   animation: fadeIn var(--ce-transition-gentle) both;
 }
@@ -171,12 +171,12 @@
 .input-wrapper input {
   width: 100%;
   padding: var(--ce-space-md) var(--ce-space-lg);
-  padding-right: calc(var(--ce-size-send-button) + var(--ce-space-md) + var(--ce-space-sm));
+  padding-right: calc(34px + var(--ce-space-md) + var(--ce-space-sm));  /* send button + gap */
   border: 1px solid var(--ce-color-border);
   border-radius: var(--ce-radius-lg);
   background-color: var(--ce-color-bg-surface);
   color: var(--ce-color-text-primary);
-  font-size: var(--ce-font-size-sm);
+  font-size: var(--ce-font-size-base);  /* 16px — prevents iOS Safari zoom on focus */
   transition: border-color var(--ce-transition-base),
               box-shadow var(--ce-transition-base);
 }
@@ -194,8 +194,8 @@
 .send-button {
   position: absolute;
   right: var(--ce-space-sm);
-  width: var(--ce-size-send-button);
-  height: var(--ce-size-send-button);
+  width: 34px;                          /* component-specific, not a design token */
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -222,7 +222,7 @@
 }
 
 .send-button .material-symbols-rounded {
-  font-size: var(--ce-size-icon-sm);
+  font-size: 1.125rem;                  /* 18px — component-specific */
 }
 
 /* ─── Loading dots ─── */
@@ -235,8 +235,8 @@
 }
 
 .loading-dots span {
-  width: var(--ce-size-loading-dot);
-  height: var(--ce-size-loading-dot);
+  width: 8px;                           /* component-specific */
+  height: 8px;
   background-color: var(--ce-color-accent);
   border-radius: var(--ce-radius-full);
   animation: pulse 1.5s infinite ease-in-out;
@@ -264,7 +264,7 @@
 /* ─── Scrollbar ─── */
 
 .messages-scroll::-webkit-scrollbar {
-  width: var(--ce-size-scrollbar);
+  width: 6px;                           /* component-specific */
 }
 
 .messages-scroll::-webkit-scrollbar-track {
@@ -279,10 +279,6 @@
 /* ─── Scale up: Tablet (481px+) ─── */
 
 @media (min-width: 481px) {
-  .welcome {
-    padding: 20svh var(--ce-space-lg) 0;
-  }
-
   .welcome-text h1 {
     font-size: var(--ce-font-size-2xl);
   }
@@ -316,18 +312,18 @@
 
   .input-wrapper input {
     padding: var(--ce-space-lg) var(--ce-space-xl);
-    padding-right: calc(var(--ce-size-send-button-md) + var(--ce-space-md) + var(--ce-space-sm));
+    padding-right: calc(40px + var(--ce-space-md) + var(--ce-space-sm));
     font-size: var(--ce-font-size-base);
-    border-radius: var(--ce-radius-xl);
+    border-radius: var(--ce-radius-lg);
   }
 
   .send-button {
-    width: var(--ce-size-send-button-md);
-    height: var(--ce-size-send-button-md);
+    width: 40px;                        /* tablet+ size */
+    height: 40px;
   }
 
   .send-button .material-symbols-rounded {
-    font-size: var(--ce-size-icon-md);
+    font-size: 1.25rem;                 /* 20px — tablet+ */
   }
 }
 
@@ -335,7 +331,7 @@
 
 @media (min-width: 769px) {
   .welcome-text h1 {
-    font-size: var(--ce-font-size-3xl);
+    font-size: 3.25rem;                 /* 52px — only used at this breakpoint */
   }
 
   .messages-scroll {

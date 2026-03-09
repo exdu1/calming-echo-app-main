@@ -1,6 +1,6 @@
 .theme-toggle {
-  width: var(--ce-size-toggle);
-  height: var(--ce-size-toggle);
+  width: 38px;                          /* component-specific — mobile */
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,7 +24,7 @@
 
 @media (min-width: 481px) {
   .theme-toggle {
-    width: var(--ce-size-toggle-md);
-    height: var(--ce-size-toggle-md);
+    width: 44px;                        /* tablet+ — meets WCAG 2.5.8 */
+    height: 44px;
   }
 }
