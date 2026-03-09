@@ -3,12 +3,7 @@
    
    Solid background with a contained, rounded image.
    Bold heading and CTA sit below the image.
-   Inspired by Achelous Spa layout + Squarespace typography.
    =================================================== */
-
-/* .homepage {
-  
-} */
 
 /* ─── Keyframes ─── */
 
@@ -81,7 +76,7 @@
   background: var(--ce-gradient-button);
   color: #fff;
   text-decoration: none;
-  border-radius: var(--ce-radius-xl);
+  border-radius: var(--ce-radius-lg);
   font-weight: var(--ce-font-weight-bold);
   font-size: var(--ce-font-size-base);
   letter-spacing: 0.04em;
@@ -132,7 +127,7 @@
 }
 
 .feature-icon {
-  font-size: var(--ce-size-icon-lg);
+  font-size: 2.5rem;                    /* 40px — component-specific */
   color: var(--ce-color-accent);
   margin-bottom: var(--ce-space-lg);
   display: block;
@@ -166,7 +161,7 @@
   }
 
   .hero-content h1 {
-    font-size: var(--ce-font-size-3xl);
+    font-size: 3.25rem;                 /* 52px — only used at this breakpoint */
   }
 
   .cta-button {
@@ -217,7 +212,7 @@
   }
 
   .hero-content h1 {
-    font-size: var(--ce-font-size-4xl);
+    font-size: 4rem;                    /* 64px — only used at this breakpoint */
   }
 
   .hero-label {
