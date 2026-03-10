@@ -79,13 +79,12 @@ const ChatPage = () => {
                 <div className="welcome">
                     <div className="welcome-text">
                         <h1>What's good fam!</h1>
-                        <p>What're you saying?</p>
                     </div>
                     <form className="input-form input-form--welcome" onSubmit={handleSubmit}>
                         <div className="input-wrapper">
                             <input
                                 type="text"
-                                placeholder="Type your message..."
+                                placeholder="What are you saying right now?"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 disabled={isLoading}
@@ -137,7 +136,7 @@ const ChatPage = () => {
                             <div className="input-wrapper">
                                 <input
                                     type="text"
-                                    placeholder="Type your message..."
+                                    placeholder="What're you saying right now?"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     disabled={isLoading}
