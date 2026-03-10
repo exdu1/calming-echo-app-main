@@ -7,7 +7,6 @@ const ChatPage = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const messagesEndRef = useRef(null);
     const scrollContainerRef = useRef(null);
     const inputRef = useRef(null);
 
