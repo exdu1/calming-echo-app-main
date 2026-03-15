@@ -1,6 +1,7 @@
 // Import required packages
 import ai from '../config/gemini.js';
 import config, { validateConfig } from '../config/index.js';
+import { SYSTEM_INSTRUCTION } from '../prompts/activeListenerPrompt.js';
 
 
 
@@ -12,17 +13,26 @@ async function testGeminiAPI() {
     }
 
     console.log('Testing Gemini API.');
-    const prompt = 'Explain how AI works';
+    const prompt = "I'm feeling stressed out. I'm trying to learn how to code, but I default to using AI rather than pushing through the challenge of debugging myslef because it's frustrating and time consuming. I feel conflicted between learning efficiently, and 'trial by fire'.";
     console.log(`Sending prompt: "${prompt}"`);
 
-    const result = await ai.models.generateContent({
+    const result = await ai.models.generateContentStream({
       model: config.geminiModel,
-      contents: prompt
+      contents: prompt,
+      config: {
+        systemInstruction: SYSTEM_INSTRUCTION
+      }
     })
     // Log the response
     console.log('\nGemini API Response:');
     console.log('===================');
-    console.log(result.text);
+    
+    let chunkCount = 0;
+    for await (const chunk of result) {
+      chunkCount++;
+      console.log(`${chunkCount}: ${chunk.text}`);
+    }
+    
     console.log('===================');
     console.log('\nAPI test completed successfully!');
     
