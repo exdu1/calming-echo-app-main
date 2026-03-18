@@ -22,7 +22,8 @@ async function testGeminiAPI() {
       config: {
         systemInstruction: SYSTEM_INSTRUCTION
       }
-    })
+    });
+    
     // Log the response
     console.log('\nGemini API Response:');
     console.log('===================');
