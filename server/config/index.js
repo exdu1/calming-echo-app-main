@@ -22,6 +22,7 @@ export function validateConfig() {
     return false;
   } 
 
+  console.log("Succes");
   return true;
 
 };

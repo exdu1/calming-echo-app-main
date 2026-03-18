@@ -20,8 +20,15 @@ router.post('/', async (req, res) => {
     const contents = buildContents(message, history);
     console.log("Sending prompt to Gemini...");
 
+    // Set streaming headers
+    res.writeHead(200, {
+      'Content-Type': 'text/plain',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    });
+
     // Get response from Gemini using system instruction and structured contents
-    const result = await ai.models.generateContent({
+    const result = await ai.models.generateContentStream({
       model: config.geminiModel,
       contents: contents,
       config: {
@@ -29,19 +36,26 @@ router.post('/', async (req, res) => {
       }
     });
 
+    for await (const chunk of result) {
+      res.write(chunk.text);
+    };
     console.log('Generated response successfully');
+    res.end();
 
-    return res.json({
-      success: true,
-      response: result.text
-    });
   } catch (error) {
     console.error('Active listener request failed:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to process your message.',
-      error: error.message
-    });
+
+    // If headers haven't been sent, send a JSON error
+    if (!res.headersSent) {
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to process your message.',
+        error: error.message
+      });
+    } 
+
+    // If streaming has already started, close the connection
+    res.send();
   }
 });
 

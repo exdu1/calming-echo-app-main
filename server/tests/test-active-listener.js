@@ -35,10 +35,7 @@ async function testActiveListener() {
     console.log('\nAPI Response:');
     console.log('===================');
     console.log('Success:', response.data.success);
-    console.log('\nSummary:');
-    console.log(response.data.summary);
-    console.log('\nQuestion:');
-    console.log(response.data.question);
+    console.log(response.data.textMessage);
     console.log('===================');
     console.log('\nAPI test completed successfully!');
     
