@@ -1,6 +1,5 @@
 /* /client/src/routes/chatPage/ChatPage.jsx */
 import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import './chatPage.css';
 
 const ChatPage = () => {
@@ -33,7 +32,10 @@ const ChatPage = () => {
         
         if (!input.trim()) return;
         
-        const userMessage = { text: input, isUser: true, timestamp: new Date() };
+        const userMessage = { 
+            text: input, 
+            isUser: true, 
+            timestamp: new Date() };
         setMessages(prev => [...prev, userMessage]);
         setInput('');
         setIsLoading(true);
@@ -41,18 +43,51 @@ const ChatPage = () => {
         try {
             const history = messages.slice(-10);
             
-            const response = await axios.post('/api/active-listener', {
-                message: input,
-                history
+            const response = await fetch('/api/active-listener', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application-json',
+                },
+                body: JSON.stringify({
+                    message: input,
+                    history,
+                }),
             });
-            
+
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+
+            // Add empty AI message to state and append to it as chunks arrive
             const aiMessage = { 
-                text: response.data.response, 
+                text: '', 
                 isUser: false, 
                 timestamp: new Date(),
             };
-            
             setMessages(prev => [...prev, aiMessage]);
+
+            // Read the stream
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+
+            while (true) {
+                const { value, done } = await reader.read();
+
+                if (done) break;
+
+                const text = decoder.decode(value, { stream: true });
+
+                // Update the last message in state by appending the new chunk
+                setMessages(prev => {
+                    const updated = [...prev];
+                    const last = updated[updated.length - 1];
+                    updated[updated.length - 1] = {
+                        ...last,
+                        text: last.text + text,
+                    };
+                    return updated;
+                });
+            }
         } catch (error) {
             console.error('Error communicating with AI:', error);
             
