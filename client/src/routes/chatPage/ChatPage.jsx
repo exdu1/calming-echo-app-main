@@ -64,18 +64,14 @@ const ChatPage = () => {
             }
 
             // Phase 1: Collect the full stream
-            const reader =
-                response.body.getReader();
+            const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let fullText = '';
 
             while (true) {
-                const { value, done } =
-                    await reader.read();
+                const { value, done } = await reader.read();
                 if (done) break;
-                fullText += decoder.decode(
-                    value, { stream: true }
-                );
+                fullText += decoder.decode(value, { stream: true });
             }
 
             // Phase 2: Reveal word by word
@@ -92,14 +88,8 @@ const ChatPage = () => {
             const words = fullText.split(' ');
             let revealed = '';
 
-            for (
-                let i = 0;
-                i < words.length;
-                i++
-            ) {
-                revealed +=
-                    (i === 0 ? '' : ' ')
-                    + words[i];
+            for (let i = 0; i < words.length; i++) {
+                revealed += (i === 0 ? '' : ' ') + words[i];
                 const current = revealed;
 
                 setMessages(prev => {
@@ -114,7 +104,7 @@ const ChatPage = () => {
                 });
 
                 await new Promise(
-                    r => setTimeout(r, 30)
+                    r => setTimeout(r, 50)
                 );
             }
 
