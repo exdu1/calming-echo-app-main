@@ -1,5 +1,4 @@
 /* /client/src/routes/chatPage/ChatPage.jsx */
-/* /client/src/routes/chatPage/ChatPage.jsx */
 import { useState, useEffect, useRef } from 'react';
 import './chatPage.css';
 
@@ -135,7 +134,7 @@ const ChatPage = () => {
             {!hasMessages ? (
                 <div className="welcome">
                     <div className="welcome-text">
-                        <h1>What's good fam!</h1>
+                        <h1>Hi there.</h1>
                     </div>
                     <form
                         className="input-form input-form--welcome"
@@ -144,7 +143,7 @@ const ChatPage = () => {
                         <div className="input-wrapper">
                             <input
                                 type="text"
-                                placeholder="What are you saying right now?"
+                                placeholder="How is your day going?"
                                 value={input}
                                 onChange={(e) =>
                                     setInput(e.target.value)
@@ -222,7 +221,7 @@ const ChatPage = () => {
                             <div className="input-wrapper">
                                 <input
                                     type="text"
-                                    placeholder="What're you saying right now?"
+                                    placeholder="How is your day going?"
                                     value={input}
                                     onChange={(e) =>
                                         setInput(e.target.value)
