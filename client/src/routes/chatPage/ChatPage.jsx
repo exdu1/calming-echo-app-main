@@ -1,11 +1,11 @@
 /* /client/src/routes/chatPage/ChatPage.jsx */
 import { useState, useEffect, useRef } from 'react';
+import useChat from '../../hooks/useChat'; 
 import './chatPage.css';
 
 const ChatPage = () => {
-    const [messages, setMessages] = useState([]);
+    const { messages, isLoading, sendMessage } = useChat();
     const [input, setInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
     const scrollContainerRef = useRef(null);
     const inputRef = useRef(null);
 
@@ -29,102 +29,9 @@ const ChatPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!input.trim()) return;
-
-        const userMessage = {
-            text: input,
-            isUser: true,
-            timestamp: new Date()
-        };
-        setMessages(prev => [...prev, userMessage]);
+        sendMessage(input);
         setInput('');
-        setIsLoading(true);
-
-        try {
-            const history = messages.slice(-10);
-
-            const response = await fetch(
-                '/api/active-listener', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: input,
-                    history,
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error(
-                    `Server error: ${response.status}`
-                );
-            }
-
-            // Phase 1: Collect the full stream
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let fullText = '';
-
-            while (true) {
-                const { value, done } = await reader.read();
-                if (done) break;
-                fullText += decoder.decode(value, { stream: true });
-            }
-
-            // Phase 2: Reveal word by word
-            const aiMessage = {
-                text: '',
-                isUser: false,
-                timestamp: new Date(),
-            };
-            setMessages(
-                prev => [...prev, aiMessage]
-            );
-            setIsLoading(false);
-
-            const words = fullText.split(' ');
-            let revealed = '';
-
-            for (let i = 0; i < words.length; i++) {
-                revealed += (i === 0 ? '' : ' ') + words[i];
-                const current = revealed;
-
-                setMessages(prev => {
-                    const updated = [...prev];
-                    updated[updated.length - 1] = {
-                        ...updated[
-                            updated.length - 1
-                        ],
-                        text: current,
-                    };
-                    return updated;
-                });
-
-                await new Promise(
-                    r => setTimeout(r, 50)
-                );
-            }
-
-        } catch (error) {
-            console.error(
-                'Error communicating with AI:',
-                error
-            );
-
-            setMessages(prev => [
-                ...prev,
-                {
-                    text: "Sorry, I couldn't connect to the AI service. Please try again later.",
-                    isUser: false,
-                    isError: true,
-                    timestamp: new Date()
-                }
-            ]);
-        } finally {
-            setIsLoading(false);
-        }
     };
 
     const hasInput = input.trim().length > 0;
