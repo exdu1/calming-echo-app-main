@@ -1,0 +1,147 @@
+/* /client/src/components/chatInput.css */
+
+/* ─── Input area ─── */
+
+.input-area {
+  padding: var(--ce-space-sm) 0;
+  padding-bottom: calc(
+    var(--ce-space-sm) + env(safe-area-inset-bottom, 0px)
+  );
+  background: linear-gradient(
+    to top,
+    var(--ce-color-bg-base) 60%,
+    transparent
+  );
+}
+
+.input-form {
+  max-width: var(--ce-width-chat-column);
+  margin: 0 auto;
+  padding: 0 var(--ce-space-md);
+}
+
+.input-form--welcome {
+  width: 100%;
+  max-width: var(--ce-width-chat-column);
+  flex-shrink: 0;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Hide scrollbar while keeping scroll */
+.input-wrapper textarea::-webkit-scrollbar {
+  display: none;
+}
+
+
+.input-wrapper textarea {
+  width: 100%;
+  padding: var(--ce-space-md) var(--ce-space-lg);
+  padding-right: calc(
+    44px + var(--ce-space-md)
+  );                                    /* send button + breathing room */
+  scrollbar-width: none;    /* Firefox */
+  border: 1px solid var(--ce-color-border);
+  border-radius: var(--ce-radius-lg);
+  background-color: var(--ce-color-bg-surface);
+  color: var(--ce-color-text-primary);
+  font-family: var(--ce-font-family-body);
+  font-size: var(--ce-font-size-base);  /* 16px — prevents iOS Safari zoom */
+  line-height: var(--ce-line-height-base);
+  resize: none;                         /* disable manual drag-to-resize */
+  overflow-y: auto;                     /* scroll when content exceeds max */
+  max-height: 150px;                    /* cap growth at ~6 lines */
+  transition: border-color var(--ce-transition-base),
+              box-shadow var(--ce-transition-base);
+}
+
+.input-wrapper textarea:focus {
+  outline: none;
+  border-color: var(--ce-color-border-focus);
+  box-shadow: 0 0 0 3px var(--ce-color-accent-soft);
+}
+
+.input-wrapper textarea::placeholder {
+  color: var(--ce-color-text-muted);
+}
+
+.send-button {
+  position: absolute;
+  right: var(--ce-space-sm);
+  bottom: var(--ce-space-sm);           /* anchor to bottom as textarea grows */
+  width: 36px;                          /* component-specific */
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--ce-radius-full);
+  background: var(--ce-color-bg-hover);
+  color: var(--ce-color-text-muted);
+  cursor: not-allowed;
+  transition: background var(--ce-transition-base),
+              color var(--ce-transition-base),
+              transform var(--ce-transition-base),
+              box-shadow var(--ce-transition-base);
+}
+
+.send-button:not(:disabled) {
+  background: var(--ce-gradient-button);
+  color: var(--ce-color-text-primary);
+  cursor: pointer;
+}
+
+.send-button:not(:disabled):hover {
+  transform: scale(1.08);
+  box-shadow: var(--ce-shadow-glow);
+}
+
+.send-button .material-symbols-rounded {
+  font-size: 1.125rem;                  /* 18px — component-specific */
+}
+
+/* ─── Scale up: Tablet (481px+) ─── */
+
+@media (min-width: 481px) {
+  .input-area {
+    padding: var(--ce-space-md) 0 var(--ce-space-lg);
+  }
+
+  .input-form {
+    padding: 0 var(--ce-space-lg);
+  }
+
+  .input-wrapper textarea {
+    padding: var(--ce-space-lg) var(--ce-space-xl);
+    padding-right: calc(
+      48px + var(--ce-space-md)
+    );
+    font-size: var(--ce-font-size-base);
+    border-radius: var(--ce-radius-lg);
+  }
+
+  .send-button {
+    width: 40px;                        /* tablet+ size */
+    height: 40px;
+  }
+
+  .send-button .material-symbols-rounded {
+    font-size: 1.25rem;                 /* 20px — tablet+ */
+  }
+}
+
+/* ─── Scale up: Desktop (769px+) ─── */
+
+@media (min-width: 769px) {
+  .input-wrapper textarea {
+    padding: var(--ce-space-xl) var(--ce-space-xl);
+    padding-right: calc(
+      48px + var(--ce-space-lg)
+    );
+    font-size: var(--ce-font-size-md);
+  }
+}

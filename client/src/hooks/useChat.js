@@ -22,7 +22,8 @@ const useChat = () => {
       const history = messages.slice(-10);
 
       const response = await fetch(
-        './api/active-listener', {
+        './api/active-listener', 
+        {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -74,6 +75,7 @@ const useChat = () => {
       }
     } catch (error) {
       console.log('Error communicating with AI:', error);
+      
       const errorMessage = createMessage("Sorry, I couldn't connect to the AI service. Please try again later.", { isError : true });
       setMessages(prev => [...prev, errorMessage]);
     } finally {
