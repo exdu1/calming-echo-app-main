@@ -1,4 +1,4 @@
-# Calming Eacho - An Active Listening AI Chatbot
+# Calming Echo - An Active Listening AI Chatbot
 
 A full-stack web application that uses Google's Gemini API to create an active listening experience. The app simulates a thoughtful conversational partner that summarizes what you've shared and asks meaningful follow-up questions.
 
@@ -7,53 +7,77 @@ A full-stack web application that uses Google's Gemini API to create an active l
 
 ```
 project-root/
-├── client/               # Frontend React application
+├── client/                       # Frontend React application
 │   ├── src/
-│   │   ├── routes/       # Page components
-│   │   │   ├── chatPage/ # Chat interface
-│   │   │   └── homepage/ # Landing page
-│   │   ├── App.jsx       # Main component with routing
-│   │   └── main.jsx      # Entry point
+│   │   ├── components/           # Reusable UI components
+│   │   │   ├── ChatInput.jsx     # Text input with auto-resize textarea
+│   │   │   ├── chatInput.css
+│   │   │   ├── MessageList.jsx   # Message bubbles, scroll, loading dots
+│   │   │   ├── messageList.css
+│   │   │   ├── Navbar.jsx        # Fixed nav with scroll detection
+│   │   │   ├── navbar.css
+│   │   │   ├── ThemeToggle.jsx   # Dark/light mode toggle
+│   │   │   ├── themeToggle.css
+│   │   │   └── ErrorBoundary.jsx # Catch render errors, show fallback
+│   │   ├── hooks/                # Custom React hooks
+│   │   │   └── useChat.js        # Chat state, streaming, word reveal
+│   │   ├── routes/               # Page components
+│   │   │   ├── chatPage/         # Chat interface
+│   │   │   │   ├── ChatPage.jsx  # Orchestrates hook + components
+│   │   │   │   └── chatPage.css
+│   │   │   └── homepage/         # Landing page
+│   │   │       ├── Homepage.jsx
+│   │   │       └── homepage.css
+│   │   ├── App.jsx               # Routing and app shell
+│   │   ├── app.css
+│   │   ├── index.css             # Global reset and base styles
+│   │   ├── tokens.css            # Design tokens (colors, spacing, type)
+│   │   └── main.jsx              # Entry point
 │   ├── package.json
 │   └── vite.config.js
-├── server/               # Backend Express server
-|   ├── config/           # Configureation for server
-│   │   ├── index.js      # Centralized env variables and settings
-│   │   ├── gemini.js     # Initiate the gemini model   
-│   ├── server.js         # API routes and server setup
-│   ├── .env              # Environment variables (not in repo)
-│   ├── .env.example      # Example environment template
+├── server/                       # Backend Express server
+│   ├── config/                   # Configuration
+│   │   ├── index.js              # Centralized env variables and settings
+│   │   └── gemini.js             # Gemini SDK client initialization
+│   ├── middleware/
+│   │   └── index.js              # CORS, JSON parsing, logging
+│   ├── prompts/
+│   │   └── activeListenerPrompt.js  # System instruction and history formatting
+│   ├── routes/
+│   │   └── activeListener.js     # Chat endpoint with streaming
+│   ├── server.js                 # App bootstrap and route mounting
+│   ├── .env                      # Environment variables (not in repo)
+│   ├── .env.example              # Example environment template
 │   └── package.json
-└── package.json          # Root package.json for running both services
+└── package.json                  # Root scripts for running both services
 ```
 
 ## Getting Started
 
 ### Installation
 
-`1. Clone the repository:`
+1. Clone the repository:
 ```bash
 git clone https://github.com/your-username/calming-echo-app.git
 cd calming-echo-app
 ```
 
-`2. Install dependencies:`
+2. Install dependencies:
 ```bash
-npm run install: all
-cd client
-npm install --legacy-peer-deps
+npm run install:all
 ```
 
-`3. Configure your environment:`
+3. Configure your environment:
 ```bash
 cp server/.env.example server/.env
-Edit server/.env and add your Gemini API key.
 ```
+Edit `server/.env` and add your Gemini API key.
 
-`4. Start the development servers:`
+4. Start the development servers:
 ```bash
 npm run dev
 ```
+
 The client will be available at http://localhost:5173 and the server at http://localhost:3001.
 
 ## Available Scripts
